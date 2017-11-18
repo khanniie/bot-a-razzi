@@ -22,20 +22,22 @@
       <a-obj-model src="#pig-obj" mtl="#pig-mtl"position="-1 1 -3"></a-obj-model>
 -->
       <a-sky src="images/guy.jpeg"></a-sky>
+      <a-obj-model src="#bump-obj" color="0xFFFFFF" mtl="#bump-mtl"position="-1 1 0"></a-obj-model>
       <a-obj-model src="#bump-obj" color="0xFFFFFF" mtl="#bump-mtl"position="-1 1 -3"></a-obj-model>
+      <a-obj-model src="#bump-obj" color="0xFFFFFF" mtl="#bump-mtl"position="-1 1 -6"></a-obj-model>
       <a-light type="ambient" color="#445451"></a-light>
       <a-light type="point" intensity="2" position="2 4 4"></a-light>
-      <a-entity camera position="0 1.6 5">
+      <a-entity camera position="0 1.6 0" look-controls>
       <a-animation attribute="position"
         dur="2000"
         easing="linear"
-        repeat=".5"
-        to="0 1.6 -5"></a-animation>
+        repeat="indefinite"
+        to="0 1.6 -3"></a-animation>
       </a-entity>
     </a-scene>
   </body>
 </html>
-<script>
+<!-- <script>
   console.log(THREE); 
   setInterval(moveForward, 1000)
   function moveForward()
@@ -43,4 +45,4 @@
   console.log("hhhhhhhh"); 
   
   }
-</script>
+</script> -->
