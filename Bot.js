@@ -1,14 +1,14 @@
 class Bot {
     constructor(num) {
         this.obj = document.createElement("div");
-        document.body.appendChild(this.obj);
+        document.getElementById("container").appendChild(this.obj);
         console.log("new element", this.obj);
         this.obj.id = "bot" + num;
         this.id = this.obj.id;
         this.obj.classList.add("bot");
-        this.x = 0;
-        this.y = 0;
-        this.z = 0;
+        this.x = 50;
+        this.y = 50;
+        this.z = 50;
     }
     move(x, y, z) {
         this.x = x;

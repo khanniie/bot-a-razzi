@@ -21,13 +21,20 @@
     database.ref('bots').remove();
 
     function writeBotData(x, y, z, botid) {
+
         database.ref('bots/' + botid).set({
             x: x,
             y: y,
             z: z
         });
     }
+
     var numbots = 10;
+
+    database.ref('info').set({
+        numbots: numbots,
+        botsinitialized: false
+    });
 
     function create(num) {
         var div = document.createElement("div");
@@ -72,6 +79,8 @@
 
     for (var i = 0; i < numbots; i++) {
       create(i);
+      writeBotData(50, 50, 50, "bot" + i);
+      database.ref("info/botsinitialized").set(true);
     }
     </script>
 </body>
