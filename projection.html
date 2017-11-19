@@ -1,0 +1,53 @@
+<html>
+  <head>
+    <style>
+      #bot1{
+        border: 2px solid grey;
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+        top: 100px;
+        left: 100px;
+        position: relative;
+        background-color: rgb(255, 200, 200);
+      }
+    </style>
+  </head>
+  <body>
+  
+<div id="bot1"></div>
+
+
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
+<script>
+  
+  // Initialize Firebase
+  var bot1 = document.getElementById("bot1");
+  var config = {
+    apiKey: "AIzaSyD8B8P-Bejr47q3FzLG7KO3EF-CvHp6028",
+    authDomain: "bot-a-razzi.firebaseapp.com",
+    databaseURL: "https://bot-a-razzi.firebaseio.com",
+    projectId: "bot-a-razzi",
+    storageBucket: "",
+    messagingSenderId: "24375466887"
+  };
+firebase.initializeApp(config);
+var database = firebase.database();
+
+var bots = database.ref('bots/');
+bots.on('value', function(snapshot) {
+  // bot1.setAttribute("style","left:" + snapshot.val().bot1.x);
+  bot1.style.left = snapshot.val().bot1.x;
+  bot1.style.top = snapshot.val().bot1.y;
+  bot1.style.width = snapshot.val().bot1.z;
+  bot1.style.height = snapshot.val().bot1.z;
+  // bot1.setAttribute("style","top:" + snapshot.val().bot1.y);
+});
+
+</script>
+  </body>
+
+</html>
+

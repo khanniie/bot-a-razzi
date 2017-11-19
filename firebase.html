@@ -1,0 +1,56 @@
+<html>
+  <head></head>
+  <body>
+    <div id="slidecontainer">
+  <input type="range" min="1" max="500" value="100" class="slider" id="x">
+  <input type="range" min="1" max="500" value="100" class="slider" id="y">
+  <input type="range" min="1" max="200" value="100" class="slider" id="z">
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyD8B8P-Bejr47q3FzLG7KO3EF-CvHp6028",
+    authDomain: "bot-a-razzi.firebaseapp.com",
+    databaseURL: "https://bot-a-razzi.firebaseio.com",
+    projectId: "bot-a-razzi",
+    storageBucket: "",
+    messagingSenderId: "24375466887"
+  };
+firebase.initializeApp(config);
+var database = firebase.database();
+
+function writeBotData(x ,y, z, botid) {
+  database.ref('bots/' + botid).set({
+    x: x,
+    y: y,
+    z: z
+  });
+}
+
+var x = 100; var y = 100; var z = 100;
+
+var xslider = document.getElementById("x");
+xslider.oninput = function() {
+    x = this.value;
+    writeBotData(x, y, z, "bot1");
+}
+var yslider = document.getElementById("y");
+yslider.oninput = function() {
+    y = this.value;
+    writeBotData(x, y, z, "bot1");
+}
+var zslider = document.getElementById("z");
+zslider.oninput = function() {
+    z = this.value;
+    writeBotData(x, y, z, "bot1");
+}
+
+</script>
+  </body>
+
+</html>
+
