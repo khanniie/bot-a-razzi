@@ -14,6 +14,7 @@ class Bot {
         this.y = y;
         this.z = z;
         this.obj.setAttribute('position', {x: x, y: y, z:z});
+        this.obj.flushToDOM();
     }
     updateX(x) {
         this.x = x;
