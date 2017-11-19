@@ -6,7 +6,9 @@
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
     <script>
+
     // Initialize Firebase
     var config = {
         apiKey: "AIzaSyD8B8P-Bejr47q3FzLG7KO3EF-CvHp6028",
@@ -33,33 +35,48 @@
 
     database.ref('info').set({
         numbots: numbots,
-        botsinitialized: false
+        botsinitialized: false,
+        activecamera: "NA"
     });
 
-    function create(num) {
+    function create(x, y, z, num) {
         var div = document.createElement("div");
         div.id = "container" + num;
         div.innerHTML = "bot" + num;
+        var but = document.createElement("button");
+
+        but.addEventListener("click", function(){
+            console.log("button click0");
+            database.ref("info/activecamera").set("bot" + num);
+        });
+
         var sliderx = document.createElement("input");
         sliderx.type = "range";
         sliderx.id = "sliderx" + num;
-        sliderx.min = 1;
-        sliderx.max = 200;
-        sliderx.value = 50;
+        sliderx.min = -1;
+        sliderx.max = 1;
+         sliderx.step = 0.01;
+        sliderx.value = x;
+       
 
         var slidery = document.createElement("input");
         slidery.type = "range";
         slidery.id = "slidery" + num;
         slidery.min = 1;
-        slidery.max = 200;
-        slidery.value = 50;
+        slidery.max = 2;
+        slidery.step = 0.01;
+        slidery.value = y;
+        
 
         var sliderz = document.createElement("input");
         sliderz.type = "range";
         sliderz.id = "sliderz" + num;
-        sliderz.min = 1;
-        sliderz.max = 200;
-        sliderz.value = 50;
+        sliderz.min = 0;
+        sliderz.max = 2;
+        sliderz.step = 0.01;
+        sliderz.value = z;
+        
+
         sliderx.oninput = function() {
             writeBotData(sliderx.value, slidery.value, sliderz.value, "bot" + num);
         }
@@ -73,13 +90,17 @@
         div.appendChild(sliderx);
         div.appendChild(slidery);
         div.appendChild(sliderz);
+        div.appendChild(but);
 
         document.body.appendChild(div);
     }
 
     for (var i = 0; i < numbots; i++) {
-      create(i);
-      writeBotData(50, 50, 50, "bot" + i);
+      var randx = Math.random() * 0.5
+      var randy = Math.random() + 1;
+      var randz = Math.random()*2;
+      create(randx, randy, randz, i);
+      writeBotData( randx, randy , randz, "bot" + i);
       database.ref("info/botsinitialized").set(true);
     }
     </script>

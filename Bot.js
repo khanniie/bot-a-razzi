@@ -1,23 +1,19 @@
 class Bot {
     constructor(num) {
-        this.obj = document.createElement("div");
-        document.getElementById("container").appendChild(this.obj);
-        console.log("new element", this.obj);
-        this.obj.id = "bot" + num;
-        this.id = this.obj.id;
-        this.obj.classList.add("bot");
-        this.x = 50;
-        this.y = 50;
-        this.z = 50;
+        this.x = -2;
+        this.y = 4;
+        this.z = 4;
+        $('#moving-box').append("<a-sphere class='bot' color='black' radius='0.3' id='bot" + num + "' position='" + this.x + " " + this.y + " " + this.z + "'></a-sphere>");
+        this.id = "bot" + num;
+        this.obj = document.getElementById(this.id);    
+        this.obj.flushToDOM();
+
     }
     move(x, y, z) {
         this.x = x;
         this.y = y;
         this.z = z;
-        this.obj.style.left = x;
-        this.obj.style.top = y;
-        this.obj.style.width = z;
-        this.obj.style.height = z;
+        this.obj.setAttribute('position', {x: x, y: y, z:z});
     }
     updateX(x) {
         this.x = x;
