@@ -99,7 +99,7 @@
       var randx = Math.random() * 0.5
       var randy = Math.random() + 1;
       var randz = Math.random()*2;
-      create(randx, randy, randz, i);
+      // create(randx, randy, randz, i);
       writeBotData( randx, randy , randz, "bot" + i);
       database.ref("info/botsinitialized").set(true);
     }

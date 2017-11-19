@@ -82,12 +82,13 @@ function assignBotsPosition() {
     var y = bots[i].coord.y;
     var z = bots[i].coord.z;
     botElems[i].setAttribute('position', `${x} ${y} ${z}`);
-    sendToDatabase[i] = {
-      x: x,
-      y: y,
-      z: z,
-      botName: `bot${i}`
-    };
+    // sendToDatabase[i] = {
+    //   x: x,
+    //   y: y,
+    //   z: z,
+    //   botName: `bot${i}`
+    // };
+    writeBotData(x, y, z, "bot" + i);
   }
 }
 

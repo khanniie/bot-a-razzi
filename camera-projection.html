@@ -63,7 +63,6 @@
         database.ref('bots/' + "bot" + i).on('value', function(snapshot) {
             //console.log(i);
             var bot = botarr[i];
-            console.log(bot, snapshot.val().x);
             bot.move(snapshot.val().x, snapshot.val().y, snapshot.val().z);
 
         });
