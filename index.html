@@ -5,6 +5,8 @@
     <title>Hello, World! - A-Frame</title>
     <meta name="description" content="Hello, World! - A-Frame">
     <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+    <script src="https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/p5.min.js"></script>
   </head>
   <body>
     <a-scene>
@@ -35,16 +37,16 @@
       </a-entity>
 -->
       
-      <a-entity camera position="0 1.8 0" look-controls>
+      <a-entity camera id="person" position="0 1.8 0" look-controls>
 <!--      <a-obj-model src="#person-obj" mtl="#person-mtl" scale=".5 .5 .5" position="0 .5 0"></a-obj-model>-->
-
       <a-animation attribute="position"
         dur="9000"
         easing="linear"
         repeat="indefinite"
         to="0 1.8 -8"></a-animation>
       </a-entity>
+      <a-entity id="bot-container" scale=".1 .1 .1"></a-entity>
     </a-scene>
-    
+    <script type="text/javascript" src="generate.js"></script>
   </body>
 </html>
