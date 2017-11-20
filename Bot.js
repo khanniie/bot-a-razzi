@@ -15,6 +15,8 @@ class Bot {
         this.z = z;
         this.obj.setAttribute('position', {x: x, y: y, z:z});
         this.obj.flushToDOM();
+        console.log("movement for bot ");
+        console.log(this.id);
     }
     updateX(x) {
         this.x = x;
