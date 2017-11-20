@@ -6,44 +6,44 @@
     <title>Hello, World! - A-Frame</title>
     <meta name="description" content="Hello, World! - A-Frame">
     <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-look-at-component@0.5.1/dist/aframe-look-at-component.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <a-scene id="scene">
+    <a-scene vr-mode-ui="enabled: false" id="scene">
         <a-assets>
-            <a-asset-item id="ground-obj" src="models/ground.obj"></a-asset-item>
-            <a-asset-item id="ground-mtl" src="models/ground.mtl"></a-asset-item>
-            <a-asset-item id="person-obj" src="models/person.obj"></a-asset-item>
-            <a-asset-item id="person-mtl" src="models/person.mtl"></a-asset-item>
+            <a-asset-item id="ground-obj" src="assets/models/ground.obj"></a-asset-item>
+            <a-asset-item id="ground-mtl" src="assets/models/ground.mtl"></a-asset-item>
+            <a-asset-item id="person-obj" src="assets/models/person.obj"></a-asset-item>
+            <a-asset-item id="person-mtl" src="assets/models/person.mtl"></a-asset-item>
         </a-assets>
         <a-light type="ambient" intensity="7" color="#ed8080"></a-light>
         <a-light type="directional" intensity=".05" color="#edae59" position="1 5 0"></a-light>
         <a-light type="directional" intensity=".1" color="#387a78" position="-1 5 0"></a-light>
         <a-light type="directional" intensity=".1" color="#387a78" position="1 5 4"></a-light>
         <a-light type="directional" intensity=".05" color="#edae59" position="-1 5 4"></a-light>
-        <a-sky src="images/ocean.jpg"></a-sky>
+        <a-sky src="assets/images/ocean.jpg"></a-sky>
         <a-obj-model src="#ground-obj" mtl="#ground-mtl" position="-1 1 12"></a-obj-model>
         <a-obj-model src="#ground-obj" mtl="#ground-mtl" position="-1 1 4"></a-obj-model>
         <a-obj-model src="#ground-obj" mtl="#ground-mtl" position="-1 1 -4"></a-obj-model>
         <a-obj-model src="#ground-obj" mtl="#ground-mtl" position="-1 1 -12"></a-obj-model>
         <a-obj-model src="#ground-obj" mtl="#ground-mtl" position="-1 1 -16"></a-obj-model>
         <a-entity id="moving-box">
-           <a-animation attribute="position" dur="9000" easing="linear" repeat="indefinite" to="0 0 -8"></a-animation>
-          <a-entity id="person" obj-model="obj: #person-obj; mtl: #person-mtl" scale=".1 .1 .1" position="0 1.7 -1"></a-entity>
-          <a-entity id="active-camera" position="0 0.5 0.5">
-              <a-camera></a-camera>
-          </a-entity>
-           <!-- <a-entity id="active-camera" camera position="0 0.1 1" look-controls></a-entity> -->
+            <a-animation attribute="position" dur="9000" easing="linear" repeat="indefinite" to="0 0 -8"></a-animation>
+            <a-entity id="person" obj-model="obj: #person-obj; mtl: #person-mtl" scale=".1 .1 .1" position="0 1.7 -1"></a-entity>
+            <a-entity id="active-camera" position="0 0.5 0.5">
+                <a-camera look-at="#person"></a-camera>
+            </a-entity>
         </a-entity>
-        
     </a-scene>
+    <!-- scripts! -->
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
-    <script src="Bot.js"></script>
+    <script src="js/Bot.js"></script>
     <script>
-    // Initialize Firebase
+    //Initialize Firebase
     var config = {
         apiKey: "AIzaSyD8B8P-Bejr47q3FzLG7KO3EF-CvHp6028",
         authDomain: "bot-a-razzi.firebaseapp.com",
@@ -54,44 +54,62 @@
     };
     firebase.initializeApp(config);
     var database = firebase.database();
-    var numbots = 0;
-    database.ref('info/numbots').on('value', function(snapshot) {
+
+    //grab number of robots
+    var numbots = 10;
+    database.ref('info/numbots').once('value', function(snapshot) {
         numbots = snapshot.val();
     });
+
+    //initialize the bots
     var botarr = [];
+
+    //update function, fixes weird server side timing
     var updatebot = function(i) {
         database.ref('bots/' + "bot" + i).on('value', function(snapshot) {
             var bot = botarr[i];
-            console.log(bot);
-            bot.move(snapshot.val().x, snapshot.val().y, snapshot.val().z);
+            if (snapshot.val() != null) {
+                bot.move(snapshot.val().x, snapshot.val().y, snapshot.val().z);
+            }
         });
     }
+
+    // //checks that the bots exist, updates position if the other page is reinitialized
     database.ref('info/botsinitialized').on('value', function(snapshot) {
-        console.log("reinitialize", numbots);
         $(".bot").remove();
-        botarr = [];
-        for (var i = 0; i < numbots; i++) {
-            botarr.push(new Bot(i));
-        }
-        for (var i = 0; i < numbots; i++) {
-            updatebot(i);
+        if (snapshot.val()) {
+            botarr = [];
+            for (var i = 0; i < numbots; i++) {
+                botarr.push(new Bot(i));
+                updatebot(i);
+            }
+            //setup
+            setInterval(changeCameraView, 5000);
+        } else {
+            alert("the VR side hasn't started up yet!");
+            var cam = document.getElementById("active-camera");
+            cam.setAttribute("position", { x: 0, y: 0.5, z: 0.5 });
+            cam.flushToDOM();
         }
     });
+    var currentCamera = null;
+    // //camera view changer
+    var changeCameraView = function() {
+        var randomnum = Math.floor(Math.random() * numbots);
+        var randombot = document.getElementById("bot" + randomnum);
 
-     database.ref('info/activecamera').on('value', function(snapshot) {
-        console.log("CHANGE CAMERA");
-        var bot = document.getElementById(snapshot.val());
-        console.log(bot);
-        if(bot == null){   
-            bot = document.getElementById("bot1");
+        botarr[randomnum].currentCamera = true;
+        if (currentCamera != null) {
+            currentCamera.currentCamera = false;
         }
+        currentCamera = botarr[randomnum];
 
-        var pos = bot.getAttribute('position');
+        var pos = randombot.getAttribute('position');
         var cam = document.getElementById("active-camera");
-        cam.setAttribute("position", {x: pos.x * 0.3, y: pos.y * 0.3, z:pos.z * 0.3});
+        cam.setAttribute("position", { x: pos.x, y: pos.y, z: pos.z });
         cam.flushToDOM();
+    }
 
-    });
     </script>
 </body>
 

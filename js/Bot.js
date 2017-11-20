@@ -7,6 +7,7 @@ class Bot {
         this.id = "bot" + num;
         this.obj = document.getElementById(this.id);    
         this.obj.flushToDOM();
+        this.currentCamera = false;
 
     }
     move(x, y, z) {
@@ -15,8 +16,11 @@ class Bot {
         this.z = z;
         this.obj.setAttribute('position', {x: x, y: y, z:z});
         this.obj.flushToDOM();
-        console.log("movement for bot ");
-        console.log(this.id);
+        if(this.currentCamera){
+             var cam = document.getElementById("active-camera");
+            cam.setAttribute("position", { x: x, y: y, z: z });
+            cam.flushToDOM();
+        }
     }
     updateX(x) {
         this.x = x;

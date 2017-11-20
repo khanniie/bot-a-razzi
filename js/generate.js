@@ -2,10 +2,11 @@ let sky = document.getElementById('thesky');
 
   //container for all bots. All bots flock around its position
   //eventually animate this to make it kinda follow the back of the person
-var numBots = 20;
+var numBots = 10;
 var botContainer = document.getElementById('bot-container');
 var botElems = new Array();
 var sendToDatabase = new Array();
+var botsIntialized = false;
 
 
 // get random hex color
@@ -29,8 +30,9 @@ function justABall() {
       circleElement.setAttribute('geometry', `primitive: sphere; radius: 1`);
       botContainer.appendChild(circleElement);
 }
-//justABall()
 
+
+//justABall()
 function generateBots() {
   for (var i=0; i<numBots; i++) {
     var thisbot = document.createElement('a-entity');
@@ -41,6 +43,7 @@ function generateBots() {
     botElems[i] = thisbot;
   }
 }
+
 generateBots();
 
 //-------------------------- p5 portion --------------------------------
@@ -64,6 +67,11 @@ function setup() {
 
 
 function draw() {
+  if(!botsIntialized){
+    setIntializeTrue();
+    botsIntialized = true;
+  }
+  
   personPos.y = containerPos.y-8;
   for(var i=0; i<numBots; i++){
     bots[i].update();
@@ -82,12 +90,6 @@ function assignBotsPosition() {
     var y = bots[i].coord.y;
     var z = bots[i].coord.z;
     botElems[i].setAttribute('position', `${x} ${y} ${z}`);
-    // sendToDatabase[i] = {
-    //   x: x,
-    //   y: y,
-    //   z: z,
-    //   botName: `bot${i}`
-    // };
     writeBotData(x, y, z, "bot" + i);
   }
 }
@@ -197,5 +199,7 @@ class Bot {
   }
 }
 
-
+window.onbeforeunload = function(){
+    setIntializeFalse();
+}
 
