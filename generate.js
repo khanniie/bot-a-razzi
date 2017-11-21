@@ -6,7 +6,7 @@ var person = document.getElementById('person');
 var botContainer = document.getElementById('bot-container');
 var distance;
 var displacementY = 0.8;
-var displacementZ = 2.4;
+var displacementZ = 4;
 var botElems = new Array();
 var botsIntialized = false;
 
@@ -26,10 +26,15 @@ function getRandomColor() {
 
 function generateBots() {
   for (var i=0; i<numBots; i++) {
-    var thisbot = document.createElement('a-entity');
+    
+    var thisbot = document.createElement('a-obj-model');
     thisbot.setAttribute('id', `bot${i}`);
-    thisbot.setAttribute('geometry', `primitive: cone; radius-top: 0; radius-bottom: 0.5; height: 4`);
-    thisbot.setAttribute('color', `#${getRandomColor()}`);
+    thisbot.setAttribute('src', `#bot-obj`);
+    thisbot.setAttribute('mtl', `#bot-mtl`);
+    // var thisbot = document.createElement('a-entity');
+    // thisbot.setAttribute('id', `bot${i}`);
+    // thisbot.setAttribute('geometry',"primitive: cone; radius-top:0; radius-bottom: 0.5; height:1;");
+    //thisbot.setAttribute('color', `#${getRandomColor()}`);
     botContainer.appendChild(thisbot);
     botElems[i] = thisbot;
   }
@@ -45,9 +50,9 @@ var personRot;
 var personPrev;
 var jumped = false;
 
-var maxV = 0.05;
-var maxA = 0.01;
-var range = 5;
+var maxV = 0.01;
+var maxA = 0.002;
+var range = 1;
 
 function setup() {
   noCanvas();
@@ -112,7 +117,7 @@ function assignBotsPosition() {
     var zz = bots[i].rotation.z;
     botElems[i].setAttribute('position', `${x} ${y} ${z}`);
     botElems[i].setAttribute('rotation', `${xx} ${yy} ${zz}`)
-    writeBotData(x*0.1, y*0.1, z*0.1, "bot" + i);
+    writeBotData(x, y, z, "bot" + i);
   }
 }
 
@@ -141,11 +146,11 @@ class Bot {
   calcRotation() {
     var z = 0;
     var y = personRot.y;
-    var x = degrees(PI/2 + atan(displacementY/displacementZ));
+    var x = degrees(-PI + atan(displacementY/displacementZ));
     var zz = this.rotation.z + (z-this.rotation.z)*0.1;
     var yy = this.rotation.y + (y-this.rotation.y)*0.1;
     var xx = this.rotation.x + (x-this.rotation.x)*0.1;
-    return createVector(xx, yy, zz);
+    return createVector(x, y, z);
   }
 
   aliVector() {
