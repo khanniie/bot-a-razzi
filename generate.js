@@ -28,7 +28,7 @@ function generateBots() {
   for (var i=0; i<numBots; i++) {
     var thisbot = document.createElement('a-entity');
     thisbot.setAttribute('id', `bot${i}`);
-    thisbot.setAttribute('geometry', `primitive: cone; radius-top: 0; radius-bottom: 0.8`);
+    thisbot.setAttribute('geometry', `primitive: cone; radius-top: 0; radius-bottom: 0.5; height: 4`);
     thisbot.setAttribute('color', `#${getRandomColor()}`);
     botContainer.appendChild(thisbot);
     botElems[i] = thisbot;
@@ -112,7 +112,7 @@ function assignBotsPosition() {
     var zz = bots[i].rotation.z;
     botElems[i].setAttribute('position', `${x} ${y} ${z}`);
     botElems[i].setAttribute('rotation', `${xx} ${yy} ${zz}`)
-    writeBotData(x, y, z, "bot" + i);
+    writeBotData(x*0.1, y*0.1, z*0.1, "bot" + i);
   }
 }
 
@@ -141,8 +141,11 @@ class Bot {
   calcRotation() {
     var z = 0;
     var y = personRot.y;
-    var x = PI/2 + atan(displacementY/displacementZ);
-    return createVector(degrees(x), y, z);
+    var x = degrees(PI/2 + atan(displacementY/displacementZ));
+    var zz = this.rotation.z + (z-this.rotation.z)*0.1;
+    var yy = this.rotation.y + (y-this.rotation.y)*0.1;
+    var xx = this.rotation.x + (x-this.rotation.x)*0.1;
+    return createVector(xx, yy, zz);
   }
 
   aliVector() {
