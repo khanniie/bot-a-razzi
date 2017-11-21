@@ -21,13 +21,15 @@ function writeBotData(x, y, z, botid) {
     });
 }
 
-var numbots = 10;
-
+var InitializeWithNumBots = function(num){
 database.ref('info').set({
-    numbots: numbots,
+    numbots: num,
     botsinitialized: false,
     activecamera: "NA"
 });
+}
+
+
 
 var setIntializeTrue = function(){
     database.ref("info/botsinitialized").set(true);

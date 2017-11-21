@@ -19,10 +19,11 @@
         </a-assets>
         <a-entity position="0 2.25 -15" particle-system="preset: snow"></a-entity>
         <a-sky color="black"></a-sky>
-            <a-entity id="person" obj-model="obj: #head-obj;" scale="0.3 0.3 0.3" position="0 1.5 -1" rotation="0 90 0"></a-entity>
-            <a-entity id="active-camera" position="1 0.3 -1.3" rotation="0 90 0">
-                <a-camera></a-camera>
+            <a-entity id="person" obj-model="obj: #head-obj;" scale="0.8 0.8 0.8" position="0 3 -8" rotation="0 90 0"></a-entity>
+            <a-entity id="bot-container" position="0 4 -2">
         </a-entity>
+        <a-entity id="active-camera" position="3 2 -10" rotation="0 140 0">
+                <a-camera></a-camera>s
     </a-scene>
     <!-- scripts! -->
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
@@ -43,7 +44,7 @@
     var database = firebase.database();
 
     //grab number of robots
-    var numbots = 10;
+    var numbots = 6;
     database.ref('info/numbots').once('value', function(snapshot) {
         numbots = snapshot.val();
     });
@@ -72,9 +73,6 @@
             }
         } else {
             alert("the VR side hasn't started up yet!");
-            var cam = document.getElementById("active-camera");
-            cam.setAttribute("position", { x: 0, y: 0.5, z: 0.5 });
-            cam.flushToDOM();
         }
     });
 

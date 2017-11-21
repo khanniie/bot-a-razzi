@@ -31,9 +31,10 @@
         <a-obj-model src="#ground-obj" mtl="#ground-mtl" position="-1 1 -16"></a-obj-model>
         <a-entity id="moving-box">
             <a-animation attribute="position" dur="9000" easing="linear" repeat="indefinite" to="0 0 -8"></a-animation>
-            <a-entity id="person" obj-model="obj: #person-obj; mtl: #person-mtl" scale=".1 .1 .1" position="0 1.7 -1"></a-entity>
-            <a-entity id="active-camera" position="0 0.5 0.5">
-                <a-camera look-at="#person"></a-camera>
+            <a-entity id="person" obj-model="obj: #person-obj; mtl: #person-mtl" scale=".1 .1 .1" position="0 1.7 -1">
+            </a-entity>
+            <a-entity id="active-camera" position="0 0.5 -4">
+                <a-camera></a-camera>
             </a-entity>
         </a-entity>
     </a-scene>
@@ -109,7 +110,6 @@
         cam.setAttribute("position", { x: pos.x, y: pos.y, z: pos.z });
         cam.flushToDOM();
     }
-
     </script>
 </body>
 

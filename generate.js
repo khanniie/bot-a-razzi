@@ -8,6 +8,9 @@ var distance;
 var displacementY = 0.8;
 var displacementZ = 2.4;
 var botElems = new Array();
+var botsIntialized = false;
+
+InitializeWithNumBots(numBots);
 //var sendToDatabase = new Array();
 
 
@@ -57,6 +60,11 @@ function setup() {
 }
 
 function draw() {
+  if(!botsIntialized){
+    setIntializeTrue();
+    botsIntialized = true;
+  }
+
   personPrev = personPos;
   personRot = getRotation(person);
   personPos = getPosition(person);
@@ -104,7 +112,7 @@ function assignBotsPosition() {
     var zz = bots[i].rotation.z;
     botElems[i].setAttribute('position', `${x} ${y} ${z}`);
     botElems[i].setAttribute('rotation', `${xx} ${yy} ${zz}`)
-    //writeBotData(x, y, z, "bot" + i);
+    writeBotData(x, y, z, "bot" + i);
   }
 }
 

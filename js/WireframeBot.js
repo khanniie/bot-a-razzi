@@ -3,7 +3,9 @@ class WireBot {
         this.x = -2;
         this.y = 4;
         this.z = 4;
-        $('#scene').append("<a-obj-model class='bot' src='#sphere-obj' scale='0.2 0.2 0.2' id='bot" + num + "' position='" + this.x + " " + this.y + " " + this.z + "'></a-obj-model>");
+        $('#bot-container').append("<a-obj-model class='bot' src='#sphere-obj' id='bot" + num + "' position='" + this.x + " " + this.y + " " + this.z + "'></a-obj-model>");
+        // thisbot.setAttribute('color', `#${getRandomColor()}`);
+        //$('#bot-container').append(thisbot);
         this.id = "bot" + num;
         this.obj = document.getElementById(this.id);    
         this.obj.flushToDOM();
