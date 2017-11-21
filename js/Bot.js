@@ -4,9 +4,10 @@ class Bot {
         this.y = 4;
         this.z = 4;
         //$('#moving-box').append("<a-sphere class='bot' color='black' radius='0.3' id='bot" + num + "' position='" + this.x + " " + this.y + " " + this.z + "'></a-sphere>");
-        var thisbot = document.createElement('a-entity');
+        var thisbot = document.createElement('a-obj-model');
         thisbot.setAttribute('id', `bot${num}`);
-        thisbot.setAttribute('geometry', `primitive: sphere; radius: 0.1;`);
+        thisbot.setAttribute('src', `#eyeball-obj`);
+        thisbot.setAttribute('mtl', `#eyeball-mtl`);
         $('#moving-box').append(thisbot);
 
         this.id = "bot" + num;
@@ -19,11 +20,11 @@ class Bot {
         this.x = x;
         this.y = y;
         this.z = z;
-        this.obj.setAttribute('position', {x: 0.1*x, y: 0.1*y + 2, z: 0.1*z - 3});
+        this.obj.setAttribute('position', {x: x, y: y , z: z});
         this.obj.flushToDOM();
         if(this.currentCamera){
              var cam = document.getElementById("active-camera");
-            cam.setAttribute("position", { x: 0.1*x, y: 0.1*y + 0.55, z: 0.1*z - 2.55});
+            cam.setAttribute("position", { x: x, y: y , z: z });
             cam.flushToDOM(); 
         }
     }

@@ -17,6 +17,8 @@
             <a-asset-item id="ground-mtl" src="assets/models/ground.mtl"></a-asset-item>
             <a-asset-item id="person-obj" src="assets/models/person.obj"></a-asset-item>
             <a-asset-item id="person-mtl" src="assets/models/person.mtl"></a-asset-item>
+            <a-asset-item id="eyeball-obj" src="models/eyeball.obj"></a-asset-item>
+            <a-asset-item id="eyeball-mtl" src="models/eyeball.mtl"></a-asset-item>
         </a-assets>
         <a-light type="ambient" intensity="7" color="#ed8080"></a-light>
         <a-light type="directional" intensity=".05" color="#edae59" position="1 5 0"></a-light>
@@ -34,8 +36,11 @@
             <a-entity id="person" obj-model="obj: #person-obj; mtl: #person-mtl" scale=".1 .1 .1" position="0 1.7 -1">
             </a-entity>
             <a-entity id="active-camera" position="0 0.5 -4">
-                <a-camera look-at="#person"></a-camera>
+                <a-camera></a-camera>
             </a-entity>
+            <!-- <a-entity id="active-camera" position="0 0.5 -4">
+                <a-camera look-at="#person"></a-camera>
+            </a-entity> -->
         </a-entity>
     </a-scene>
     <!-- scripts! -->
