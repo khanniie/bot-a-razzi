@@ -20,11 +20,11 @@ class Bot {
         this.x = x;
         this.y = y;
         this.z = z;
-        this.obj.setAttribute('position', {x: x, y: y , z: z});
+        this.obj.setAttribute('position', {x: x, y: y, z: z - 4});
         this.obj.flushToDOM();
         if(this.currentCamera){
              var cam = document.getElementById("active-camera");
-            cam.setAttribute("position", { x: x, y: y , z: z });
+            cam.setAttribute("position", { x: x, y: y - 1.2 , z: z - 4});
             cam.flushToDOM(); 
         }
     }
