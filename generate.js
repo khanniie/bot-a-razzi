@@ -101,10 +101,11 @@ function assignContainerPosition() {
   var x = personPos.x -distance*sin(thetaY);
   var y = personPos.y + displacementY; //-distance*sin(thetaX);
   var z = personPos.z /*-distance*cos(thetaX)*/ -distance*cos(thetaY);
-  var xx = prev.x + (x-prev.x)*0.05;
-  var yy = prev.y + (y-prev.y)*0.05;
-  var zz = prev.z + (z-prev.z)*0.05;
-  botContainer.setAttribute('position', `${xx} ${yy} ${zz}`);
+  var rotx = prev.x + (x-prev.x)*0.05;
+  var roty = prev.y + (y-prev.y)*0.05;
+  var rotz = prev.z + (z-prev.z)*0.05;
+  botContainer.setAttribute('position', `${rotx} ${roty} ${rotz}`);
+  writeBotData(x, y, z, rotx, roty, rotz, 'botContainer');
 }
 
 function assignBotsPosition() {
@@ -112,12 +113,13 @@ function assignBotsPosition() {
     var x = bots[i].coord.x;
     var y = bots[i].coord.y;
     var z = bots[i].coord.z;
-    var xx = bots[i].rotation.x;
-    var yy = bots[i].rotation.y;
-    var zz = bots[i].rotation.z;
+    var rotx = bots[i].rotation.x;
+    var roty = bots[i].rotation.y;
+    var rotz = bots[i].rotation.z;
+    if(i==0)console.log(rotx);
     botElems[i].setAttribute('position', `${x} ${y} ${z}`);
-    botElems[i].setAttribute('rotation', `${xx} ${yy} ${zz}`)
-    writeBotData(x, y, z, "bot" + i);
+    botElems[i].setAttribute('rotation', `${rotx} ${roty} ${rotz}`)
+    writeBotData(x, y, z, rotx, roty, rotz, "bot" + i);
   }
 }
 
