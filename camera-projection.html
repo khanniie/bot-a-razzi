@@ -89,7 +89,7 @@
             //setup
             setInterval(changeCameraView, 5000);
         } else {
-            alert("the VR side hasn't started up yet!");
+            console.log("the VR side hasn't started up yet!");
             var cam = document.getElementById("active-camera");
             cam.setAttribute("position", { x: 0, y: 0.5, z: 0.5 });
             cam.flushToDOM();
