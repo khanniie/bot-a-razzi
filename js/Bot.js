@@ -32,7 +32,7 @@ class Bot {
         this.obj.flushToDOM();
         if(this.currentCamera){
              var cam = document.getElementById("active-camera");
-            cam.setAttribute("position", { x: x, y: y, z: z });
+            cam.setAttribute("position", { x: x, y: y, z: z + 0.2});
             cam.flushToDOM(); 
         }
     }
