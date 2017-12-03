@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hello, World! - A-Frame</title>
+    <meta name="description" content="Hello, World! - A-Frame">
+<!--     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script> -->
+<!--     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script> -->
+    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+    <script src="https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js"></script>
+<!--     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/p5.min.js"></script> -->
+<!--     <script src="js/database.js"></script> -->
+  </head>
+ <body>
+    <a-scene>
+    <a-assets>
+      <a-asset-item id="chair" src="bedroom-models/chair-textured.dae"></a-asset-item>
+      <a-asset-item id="desk" src="bedroom-models/desk-colored.dae"></a-asset-item>
+      <a-asset-item id="bed" src="bedroom-models/colored-bed-2.dae"></a-asset-item>
+      <a-asset-item id="carpet" src="bedroom-models/blue-carpet.jpg"></a-asset-item>
+      <a-asset-item id="guy" src="bedroom-models/guy-poster.jpg"></a-asset-item>
+      <a-asset-item id="grillbabygrill" src="bedroom-models/grillbabygrill.jpg"></a-asset-item>
+      <a-asset-item id="free-poster" src="bedroom-models/free-poster.jpeg"></a-asset-item>
+      <a-asset-item id="gakkuen" src="bedroom-models/yuri%20on%20gakkuen.jpg"></a-asset-item>
+      <a-asset-item id="free-poster" src="bedroom-models/free-poster.jpeg"></a-asset-item>
+      <a-asset-item id="hetalia" src="bedroom-models/hetalia.png"></a-asset-item>
+      <a-asset-item id="legend" src="bedroom-models/legend%20of%20sexy.jpg"></a-asset-item>
+      <a-asset-item id="person" src="bedroom-models/texture.dae"></a-asset-item>
+<!--       <a-asset-item id="person" src="bedroom-models/personcasual.dae"></a-asset-item> -->
+    </a-assets>
+    <a-entity camera userheight="1.6" position="1 2 0" look-controls></a-entity>
+      <a-collada-model src="#person" position="1 0 -1" rotation="0 -90 0" scale="0.5 0.5 0.5"></a-collada-model>
+      <a-collada-model src="#chair" position="0.95 0 -1.3" rotation="0 -90 0" scale="0.5 0.5 0.5"></a-collada-model>
+      <a-collada-model src="#desk" position="0.75 0 -1.5" rotation="0 180 0" scale="1 1 1"></a-collada-model>
+      <a-collada-model src="#bed" position="-1.2 0.4 -0.3" rotation="0 180 0" scale="1 1 1"></a-collada-model>
+      <a-light type="directional" position="0 4 0" color="#EF0" intensity="0.5"></a-light>
+      <a-light type="ambient" color="#FFF" intensity="0.5"></a-light>
+      <a-plane src="#carpet" segments-height="0.05" segments-width="0.05" scale="3.5 5 4" position="0 0 0" rotation="-90 0 0"></a-plane>
+     
+      <a-plane color="#EEE" scale="5 4 4" position="-1.75 2 0" rotation="0 90 0"></a-plane>
+      <a-plane color="#EEE" scale="5 4 4" position="1.75 2 0" rotation="0 -90 0"></a-plane>
+      <a-plane color="#EEE" scale="4 5 4" position="0 4 0" rotation="90 0 0"></a-plane>
+      <a-plane color="#EEE" scale="4 4 4" position="0 2 -2.5" rotation="0 0 0"></a-plane>
+      <a-plane color="#EEE" scale="4 4 4" position="0 2 2.5" rotation="0 180 0"></a-plane>
+
+       <a-plane src="#guy" scale="0.5 0.75 1" position="1.738 1.75 -1" rotation="0 -90 0"></a-plane>
+       <a-plane src="#free-poster" scale="0.5 0.6 1" position="1 1.75 -2.49" rotation="0 0 0"></a-plane>
+       <a-plane src="#grillbabygrill" scale="0.3 0.4 1" position="0.4 1.5 -2.49" rotation="0 0 0"></a-plane>
+       <a-plane src="#gakkuen" scale="0.5 .35 1" position="0.3 2 -2.49" rotation="0 0 0"></a-plane>
+       <a-plane src="#hetalia" scale="0.8 0.6 1" position="1.739 1.5 -1.8" rotation="0 -90 0"></a-plane>
+       <a-plane src="#legend" scale="1 0.8 1" position="1.74 2.3 -1.6" rotation="0 -90 0"></a-plane>
+
+<!--       <a-collada-model src="#person" position="0 0 2"></a-collada-model> -->
+      <a-sky color="black"></a-sky>
+    </a-scene>
+  </body>
+</html>
