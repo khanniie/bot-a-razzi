@@ -17,11 +17,14 @@
     <a-scene>
     <a-assets>
       <a-asset-item id="chair" src="bedroom-models/unfinished-chair.dae"></a-asset-item>
+      <a-asset-item id="desk" src="bedroom-models/supercrappydesk.dae"></a-asset-item>
+      <a-asset-item id="person" src="bedroom-models/personcasual.dae"></a-asset-item>
     </a-assets>
-
-      <a-collada-model src="#chair" position="0 0 0"></a-obj-model>
-
-      </a-entity>
+      <a-box color="tomato" position="1 0 1"></a-box>
+      <a-collada-model src="#chair" position="-0.5 0 -0.8" rotation="0 -90 0" scale="0.5 0.5 0.5"></a-collada-model>
+      <a-collada-model src="#desk" position="0 0 -2" roation="0 0 0" scale="1 1 1"></a-collada-model>
+<!--       <a-collada-model src="#person" position="0 0 2"></a-collada-model> -->
+      <a-sky color="black"></a-sky>
     </a-scene>
   </body>
 </html>
