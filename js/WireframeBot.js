@@ -15,7 +15,7 @@ class WireBot {
         this.x = x;
         this.y = y;
         this.z = z;
-        this.obj.setAttribute('position', {x: 0.5*x, y: 0.5*y, z:0.5*z});
+        this.obj.setAttribute('position', {x: 2*x, y: 2*y, z:2*z});
         this.obj.flushToDOM();
     }
     updateX(x) {

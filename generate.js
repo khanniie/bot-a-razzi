@@ -105,7 +105,7 @@ function assignContainerPosition() {
   var roty = prev.y + (y-prev.y)*0.05;
   var rotz = prev.z + (z-prev.z)*0.05;
   botContainer.setAttribute('position', `${rotx} ${roty} ${rotz}`);
-  writeBotData(x, y, z, rotx, roty, rotz, 'botContainer');
+  writeBotData(x, y, z, rotx, roty, rotz, 'bot-container');
 }
 
 function assignBotsPosition() {
@@ -119,7 +119,9 @@ function assignBotsPosition() {
     if(i==0)console.log(rotx);
     botElems[i].setAttribute('position', `${x} ${y} ${z}`);
     botElems[i].setAttribute('rotation', `${rotx} ${roty} ${rotz}`)
+    //console.log(x, y, z, rotx, roty, rotz, "bot" + i);
     writeBotData(x, y, z, rotx, roty, rotz, "bot" + i);
+    //writeBotData(x, y, z, "bot" + i);
   }
 }
 

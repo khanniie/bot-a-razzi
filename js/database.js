@@ -12,14 +12,26 @@ firebase.initializeApp(config);
 var database = firebase.database();
 database.ref('bots').remove();
 
-function writeBotData(x, y, z, botid) {
+function writeBotData(x, y, z, rotx, roty, rotz, botid) {
 
     database.ref('bots/' + botid).set({
         x: x,
         y: y,
-        z: z
+        z: z,
+        rotx: rotx,
+        roty: roty,
+        rotz: rotz
     });
 }
+
+// function writeBotData(x, y, z, botid) {
+
+//     database.ref('bots/' + botid).set({
+//         x: x,
+//         y: y,
+//         z: z
+//     });
+// }
 
 var InitializeWithNumBots = function(num){
 database.ref('info').set({

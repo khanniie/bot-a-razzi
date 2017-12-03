@@ -31,14 +31,24 @@
         <a-obj-model src="#ground-obj" mtl="#ground-mtl" position="-1 1 -4"></a-obj-model>
         <a-obj-model src="#ground-obj" mtl="#ground-mtl" position="-1 1 -12"></a-obj-model>
         <a-obj-model src="#ground-obj" mtl="#ground-mtl" position="-1 1 -16"></a-obj-model>
-        <a-entity id="moving-box" position="0 2.6 0">
+<!--         <a-entity id="moving-box" position="0 2.6 0">
             <a-animation attribute="position" dur="9000" easing="linear" repeat="indefinite" to="0 2.6 -8"></a-animation>
             <a-entity id="person" obj-model="obj: #person-obj; mtl: #person-mtl" scale=".1 .1 .1" position="0 -0.08 -1">
             </a-entity>
-            <a-entity id="active-camera" position="0 0.5 -4">
-                <a-camera look-at="#person"></a-camera>
-            </a-entity>
         </a-entity>
+        <a-entity id="bot-container" scale="1 1 1"></a-entity>
+
+        <a-entity id="active-camera" position="0 0.5 -4">
+            <a-camera look-at="#person"></a-camera>
+        </a-entity> -->
+      <a-entity id="person" obj-model="obj: #person-obj; mtl: #person-mtl" scale="0.3 0.3 0.3" position="0 1.5 -1"></a-entity>
+<!--       <a-animation attribute="position"
+        dur="9000"
+        easing="linear"
+        repeat="indefinite"
+        to="0 1.8 -8"></a-animation> -->
+            <a-entity id="bot-container" position="0 0 0" scale="1 1 1">
+          <a-entity look-at="#person" camera id="active-camera" position="0 1.8 0.5" look-controls></a-entity></a-entity>
     </a-scene>
     <!-- scripts! -->
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
@@ -72,11 +82,17 @@
         database.ref('bots/' + "bot" + i).on('value', function(snapshot) {
             var bot = botarr[i];
             if (snapshot.val() != null) {
-                bot.move(snapshot.val().x, snapshot.val().y, snapshot.val().z);
+                bot.move(snapshot.val().x, snapshot.val().y, snapshot.val().z, snapshot.val().rotx, snapshot.val().roty, snapshot.val().rotz);
             }
         });
     }
-
+    var container = new BotContainer();
+    database.ref('bots/bot-container').on('value', function(snapshot) {
+        if(snapshot.val() != null){
+            console.log("container move");
+            container.move(snapshot.val().x, snapshot.val().y, snapshot.val().z, snapshot.val().rotx, snapshot.val().roty, snapshot.val().rotz);
+            }
+    });
     // //checks that the bots exist, updates position if the other page is reinitialized
     database.ref('info/botsinitialized').on('value', function(snapshot) {
         $(".bot").remove();
@@ -88,6 +104,7 @@
             }
             //setup
             setInterval(changeCameraView, 5000);
+            changeCameraView();
         } else {
             console.log("the VR side hasn't started up yet!");
             var cam = document.getElementById("active-camera");
@@ -109,6 +126,7 @@
 
         var pos = randombot.getAttribute('position');
         var cam = document.getElementById("active-camera");
+        console.log(cam); 
         cam.setAttribute("position", { x: pos.x, y: pos.y, z: pos.z });
         cam.flushToDOM();
     }

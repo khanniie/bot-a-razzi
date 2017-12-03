@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title>Hello, World! - A-Frame</title>
     <meta name="description" content="Hello, World! - A-Frame">
@@ -11,49 +12,41 @@
     <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
     <script src="https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/p5.min.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v3.13.1/dist/aframe-extras.min.js"></script>
+
     <script src="js/database.js"></script>
-  </head>
- <body onunload="setIntializeFalse()">
+</head>
+
+<body onunload="setIntializeFalse()">
     <a-scene>
-    <a-assets>
-      <a-asset-item id="ground-obj" src="models/ground.obj"></a-asset-item>
-      <a-asset-item id="ground-mtl" src="models/ground.mtl"></a-asset-item>
-      <a-asset-item id="person-obj" src="models/person.obj"></a-asset-item>
-      <a-asset-item id="person-mtl" src="models/person.mtl"></a-asset-item>
-      <a-asset-item id="bot-obj" src="models/eyeball.obj"></a-asset-item>
-      <a-asset-item id="bot-mtl" src="models/eyeball.mtl"></a-asset-item>
-
+        <a-assets>
+        <a-asset-item id="bot-obj" src="models/eyeball.obj" crossOrigin="anonymous"></a-asset-item>
+        <a-asset-item id="bot-mtl" src="models/eyeball.mtl" crossOrigin="anonymous"></a-asset-item>
+        <a-asset-item id="hospital" src="models/hospital.dae" crossOrigin="anonymous"></a-asset-item>
+        <a-asset-item id="babyhead" src="models/baby_head.dae" crossOrigin="anonymous"></a-asset-item>
+        <a-asset-item id="babybody" src="models/baby_body.dae" crossOrigin="anonymous"></a-asset-item>
+        <a-asset-item id="skull-model" src="models/box.dae" crossOrigin="anonymous"></a-asset-item>
+        <a-asset-item id="baby" src="models/baby.dae" crossOrigin="anonymous"></a-asset-item>
     </a-assets>
+        
+        
+        <a-collada-model src="#babybody" scale=".4 .4 .4" position="0 -2.5 -1.5" rotation="270 0 180" custom-animation> </a-collada-model>
+        <a-collada-model src="#babyhead" scale=".4 .4 .4" position="0 -2.5 -1.5" rotation="270 0 180" custom-animation> </a-collada-model>
 
-      <a-light type="ambient" intensity="7" color="#ed8080"></a-light>
-      <a-light type="directional" intensity=".05"color="#edae59"position="1 5 0"></a-light>
-      <a-light type="directional" intensity=".1"color="#387a78"position="-1 5 0"></a-light>
-      <a-light type="directional" intensity=".1"color="#387a78"position="1 5 4"></a-light>
-      <a-light type="directional" intensity=".05"color="#edae59"position="-1 5 4"></a-light>
-          
-      
-      <a-sky src="images/ocean.jpg"></a-sky>
-      <a-obj-model src="#ground-obj" mtl="#ground-mtl"position="-1 1 12"></a-obj-model>
-      <a-obj-model src="#ground-obj" mtl="#ground-mtl"position="-1 1 4"></a-obj-model>
-      <a-obj-model src="#ground-obj" mtl="#ground-mtl"position="-1 1 -4"></a-obj-model>
-      <a-obj-model src="#ground-obj" mtl="#ground-mtl"position="-1 1 -12"></a-obj-model>      
-      <a-obj-model src="#ground-obj" mtl="#ground-mtl"position="-1 1 -16"></a-obj-model>      
+<!--        <a-entity json-model="src: url(models/baby.json);"></a-entity>-->
+        <a-collada-model src="#hospital" position="-.65 -2.1 -.47" rotation="0 90 0"></a-collada-model>
+        <a-entity camera id="person" position="0 -1.5 0" look-controls>
+        </a-entity>
+        
+        <a-entity camera id="active-camera" position="0 -1.5 0" look-controls>
+        </a-entity>
+                
+        
 
-<!--
-      <a-entity camera position="5 4 0" look-controls>
-      </a-entity>
--->
-      
-      <a-entity camera id="person" position="0 1.8 0" look-controls>
-<!--      <a-obj-model src="#person-obj" mtl="#person-mtl" scale=".5 .5 .5" position="0 .5 0"></a-obj-model>-->
-      <a-animation attribute="position"
-        dur="9000"
-        easing="linear"
-        repeat="indefinite"
-        to="0 1.8 -8"></a-animation>
-      </a-entity>
-      <a-entity id="bot-container" scale="1 1 1"></a-entity>
+        <a-entity id="bot-container" scale="1 1 1"></a-entity>
+
     </a-scene>
     <script type="text/javascript" src="generate.js"></script>
-  </body>
+</body>
+
 </html>
