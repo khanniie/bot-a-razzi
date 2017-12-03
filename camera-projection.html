@@ -13,41 +13,27 @@
 <body>
     <a-scene vr-mode-ui="enabled: false" id="scene">
         <a-assets>
-            <a-asset-item id="ground-obj" src="assets/models/ground.obj"></a-asset-item>
-            <a-asset-item id="ground-mtl" src="assets/models/ground.mtl"></a-asset-item>
-            <a-asset-item id="person-obj" src="assets/models/person.obj"></a-asset-item>
-            <a-asset-item id="person-mtl" src="assets/models/person.mtl"></a-asset-item>
-            <a-asset-item id="eyeball-obj" src="models/flat-eyball.obj"></a-asset-item>
-            <a-asset-item id="eyeball-mtl" src="models/flat-eyball.mtl"></a-asset-item>
+            <a-asset-item id="bot-obj" src="models/better-eyeball.obj" crossOrigin="anonymous"></a-asset-item>
+            <a-asset-item id="bot-mtl" src="models/better-eyeball.mtl" crossOrigin="anonymous"></a-asset-item>
+            <a-asset-item id="hospital" src="models/hospital.dae" crossOrigin="anonymous"></a-asset-item>
+            <a-asset-item id="babyhead" src="models/baby_head.dae" crossOrigin="anonymous"></a-asset-item>
+            <a-asset-item id="babybody" src="models/baby_body.dae" crossOrigin="anonymous"></a-asset-item>
+            <a-asset-item id="skull-model" src="models/box.dae" crossOrigin="anonymous"></a-asset-item>
+            <a-asset-item id="baby" src="models/baby.dae" crossOrigin="anonymous"></a-asset-item>   
         </a-assets>
-        <a-light type="ambient" intensity="7" color="#ed8080"></a-light>
-        <a-light type="directional" intensity=".05" color="#edae59" position="1 5 0"></a-light>
-        <a-light type="directional" intensity=".1" color="#387a78" position="-1 5 0"></a-light>
-        <a-light type="directional" intensity=".1" color="#387a78" position="1 5 4"></a-light>
-        <a-light type="directional" intensity=".05" color="#edae59" position="-1 5 4"></a-light>
-        <a-sky src="assets/images/ocean.jpg"></a-sky>
-        <a-obj-model src="#ground-obj" mtl="#ground-mtl" position="-1 1 12"></a-obj-model>
-        <a-obj-model src="#ground-obj" mtl="#ground-mtl" position="-1 1 4"></a-obj-model>
-        <a-obj-model src="#ground-obj" mtl="#ground-mtl" position="-1 1 -4"></a-obj-model>
-        <a-obj-model src="#ground-obj" mtl="#ground-mtl" position="-1 1 -12"></a-obj-model>
-        <a-obj-model src="#ground-obj" mtl="#ground-mtl" position="-1 1 -16"></a-obj-model>
-<!--         <a-entity id="moving-box" position="0 2.6 0">
-            <a-animation attribute="position" dur="9000" easing="linear" repeat="indefinite" to="0 2.6 -8"></a-animation>
-            <a-entity id="person" obj-model="obj: #person-obj; mtl: #person-mtl" scale=".1 .1 .1" position="0 -0.08 -1">
-            </a-entity>
-        </a-entity>
-        <a-entity id="bot-container" scale="1 1 1"></a-entity>
+        
 
-        <a-entity id="active-camera" position="0 0.5 -4">
-            <a-camera look-at="#person"></a-camera>
-        </a-entity> -->
-      <a-entity id="person" obj-model="obj: #person-obj; mtl: #person-mtl" scale="0.3 0.3 0.3" position="0 1.5 -1"></a-entity>
-<!--       <a-animation attribute="position"
-        dur="9000"
-        easing="linear"
-        repeat="indefinite"
-        to="0 1.8 -8"></a-animation> -->
-      <a-entity id="bot-container" position="0 0 0" scale="1 1 1"><a-entity look-at="#person" camera id="active-camera" position="0 1.8 0.5" look-controls></a-entity></a-entity>
+        <a-collada-model src="#babybody" scale=".4 .4 .4" position="0 -2.5 -1.5"> </a-collada-model>
+        <a-collada-model src="#hospital" position="-.65 -2.1 -.47" rotation="0 90 0"></a-collada-model>
+        
+        <a-entity id="person" position="0 -.65 -1.5"  look-at="#active-camera">
+            <a-collada-model position="0 0 0" src="#babyhead" scale=".4 .4 .4" > </a-collada-model>
+        </a-entity>
+
+
+        <a-entity id="bot-container" position="0 0 0" scale="1 1 1">
+            <a-entity look-at="#person" camera id="active-camera" position="0 1.8 1" ></a-entity>
+        </a-entity>
     </a-scene>
     <!-- scripts! -->
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>

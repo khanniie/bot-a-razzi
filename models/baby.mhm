@@ -1,0 +1,27 @@
+# Written by MakeHuman 1.1.1
+version v1.1.1
+tags baby
+camera 46.5 350.0 0.553289718843 0.462277119061 0.774317879963 2.7875
+modifier macrodetails-universal/Muscle 0.000000
+modifier macrodetails/African 0.435500
+modifier macrodetails-proportions/BodyProportions 0.156000
+modifier macrodetails/Gender 1.000000
+modifier head/head-angle-in|out 0.334000
+modifier macrodetails-height/Height 0.313000
+modifier breast/BreastSize 0.000000
+modifier macrodetails/Age 0.000000
+modifier breast/BreastFirmness 0.500000
+modifier macrodetails/Asian 0.435500
+modifier head/head-fat-decr|incr 0.374000
+modifier head/head-age-decr|incr -1.000000
+modifier macrodetails/Caucasian 0.129000
+modifier macrodetails-universal/Weight 0.741000
+skeleton cmu_mb.mhskel
+eyes Low-Poly 1cc97a30-85a1-42e6-a9f7-b3e753732baa
+pose sit01.bvh
+clothes female_casualsuit02 9896f4a4-a718-4bdd-8482-52e1855160f6
+clothesHideFaces True
+expression cry01.mhpose
+skinMaterial skins/default.mhmat
+material Low-Poly 1cc97a30-85a1-42e6-a9f7-b3e753732baa eyes/materials/brown.mhmat
+subdivide False
