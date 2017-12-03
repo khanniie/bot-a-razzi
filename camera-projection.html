@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Hello, World! - A-Frame</title>
+    <title>baby</title>
     <meta name="description" content="Hello, World! - A-Frame">
     <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-look-at-component@0.5.1/dist/aframe-look-at-component.min.js"></script>
@@ -11,10 +11,14 @@
 </head>
 
 <body>
-    <a-scene vr-mode-ui="enabled: false" id="scene">
+    <audio id="sound" src="http://www.soundjay.com/button/beep-07.wav"></audio>
+    <a-scene vr-mode-ui="enabled: false" id="babyscene">
         <a-assets>
             <a-asset-item id="bot-obj" src="models/better-eyeball.obj" crossOrigin="anonymous"></a-asset-item>
             <a-asset-item id="bot-mtl" src="models/better-eyeball.mtl" crossOrigin="anonymous"></a-asset-item>
+            <a-asset-item id="eyeball-obj" src="models/better-eyeball.obj" crossOrigin="anonymous"></a-asset-item>
+            <a-asset-item id="eyeball-mtl" src="models/better-eyeball.mtl" crossOrigin="anonymous"></a-asset-item>
+
             <a-asset-item id="hospital" src="models/hospital.dae" crossOrigin="anonymous"></a-asset-item>
             <a-asset-item id="babyhead" src="models/baby_head.dae" crossOrigin="anonymous"></a-asset-item>
             <a-asset-item id="babybody" src="models/baby_body.dae" crossOrigin="anonymous"></a-asset-item>
@@ -22,8 +26,8 @@
             <a-asset-item id="baby" src="models/baby.dae" crossOrigin="anonymous"></a-asset-item>   
         </a-assets>
         
-
-        <a-collada-model src="#babybody" scale=".4 .4 .4" position="0 -2.5 -1.5"> </a-collada-model>
+        <a-light type="point" color="white" position="0 5 0" intensity=".8" ></a-light>
+<a-collada-model src="#babybody" scale=".4 .4 .4" position="0 -2.5 -1.5"> </a-collada-model>
         <a-collada-model src="#hospital" position="-.65 -2.1 -.47" rotation="0 90 0"></a-collada-model>
         
         <a-entity id="person" position="0 -.65 -1.5"  look-at="#active-camera">
@@ -33,7 +37,10 @@
 
         <a-entity id="bot-container" position="0 0 0" scale="1 1 1">
             <a-entity look-at="#person" camera id="active-camera" position="0 1.8 1" ></a-entity>
+            <a-light id="flash" type="point" color="#FFFFAA" visible="false" ></a-light>
+
         </a-entity>
+
     </a-scene>
     <!-- scripts! -->
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
@@ -114,6 +121,41 @@
         cam.setAttribute("position", { x: pos.x, y: pos.y, z: pos.z });
         cam.flushToDOM();
     }
+    
+    var flash = function(){
+        var el = document.querySelector("#flash");
+        el.setAttribute("visible", true);
+        document.getElementById("sound").play(); 
+        setTimeout(function() {
+            el.setAttribute("visible", false); 
+        }, 200)
+        
+    }
+    //toggling visibility 
+    document.body.onkeyup = function(e){
+        if(e.keyCode == 37){
+            var el = document.querySelector("#babyscene");
+            el.setAttribute("visible",false);
+        }
+        if(e.keyCode == 39){
+            var el = document.querySelector("#babyscene");
+            el.setAttribute("visible",true);
+        }
+        if(e.keyCode == 32){
+            
+            console.log(document.querySelector("#person").object3D.rotation); 
+        }
+        if(e.keyCode == 65){
+            flash(); 
+        }
+        if(e.keyCode == 66){ 
+            var r = document.getElementById("person").getAttribute("rotation");
+            console.log(r); 
+        }
+    }
+    
+
+
     </script>
 </body>
 
