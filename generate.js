@@ -52,7 +52,7 @@ var jumped = false;
 
 var maxV = 0.01;
 var maxA = 0.002;
-var range = 1;
+var range = 3;
 
 function setup() {
   noCanvas();

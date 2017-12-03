@@ -11,6 +11,9 @@
 </head>
 
 <body>
+    <!--     <script> 
+
+    </script> -->
     <audio id="sound" src="http://www.soundjay.com/button/beep-07.wav"></audio>
     <a-scene vr-mode-ui="enabled: false" id="babyscene">
         <a-assets>
@@ -18,29 +21,23 @@
             <a-asset-item id="bot-mtl" src="models/better-eyeball.mtl" crossOrigin="anonymous"></a-asset-item>
             <a-asset-item id="eyeball-obj" src="models/better-eyeball.obj" crossOrigin="anonymous"></a-asset-item>
             <a-asset-item id="eyeball-mtl" src="models/better-eyeball.mtl" crossOrigin="anonymous"></a-asset-item>
-
             <a-asset-item id="hospital" src="models/hospital.dae" crossOrigin="anonymous"></a-asset-item>
             <a-asset-item id="babyhead" src="models/baby_head.dae" crossOrigin="anonymous"></a-asset-item>
             <a-asset-item id="babybody" src="models/baby_body.dae" crossOrigin="anonymous"></a-asset-item>
             <a-asset-item id="skull-model" src="models/box.dae" crossOrigin="anonymous"></a-asset-item>
-            <a-asset-item id="baby" src="models/baby.dae" crossOrigin="anonymous"></a-asset-item>   
+            <a-asset-item id="baby" src="models/baby.dae" crossOrigin="anonymous"></a-asset-item>
         </a-assets>
-        
-        <a-light type="point" color="white" position="0 5 0" intensity=".8" ></a-light>
-<a-collada-model src="#babybody" scale=".4 .4 .4" position="0 -2.5 -1.5"> </a-collada-model>
+        <a-light type="point" color="white" position="0 5 0" intensity=".8"></a-light>
+        <a-light type="ambient" color="white" position="0 5 0" intensity=".2"></a-light>
+        <a-light type="ambient" color="#10A0B0" intensity=".5"></a-light>
         <a-collada-model src="#hospital" position="-.65 -2.1 -.47" rotation="0 90 0"></a-collada-model>
-        
-        <a-entity id="person" position="0 -.65 -1.5"  look-at="#active-camera">
-            <a-collada-model position="0 0 0" src="#babyhead" scale=".4 .4 .4" > </a-collada-model>
+        <a-entity id="person" position="0 -.65 -1.5" look-at="#bot-container">
+            <a-collada-model position="0 0 0" src="#babyhead" scale=".4 .4 .4"> </a-collada-model>
         </a-entity>
-
-
         <a-entity id="bot-container" position="0 0 0" scale="1 1 1">
-            <a-entity look-at="#person" camera id="active-camera" position="0 1.8 1" ></a-entity>
-            <a-light id="flash" type="point" color="#FFFFAA" visible="false" ></a-light>
-
+            <a-entity look-at="#person" camera id="active-camera" position="0 1.8 1"></a-entity>
+            <a-light id="flash" type="point" color="#FFFFAA" visible="false"></a-light>
         </a-entity>
-
     </a-scene>
     <!-- scripts! -->
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
@@ -61,13 +58,84 @@
     var database = firebase.database();
 
     //grab number of robots
-    var numbots = 10;
+    var numbots = 6
     database.ref('info/numbots').once('value', function(snapshot) {
         numbots = snapshot.val();
     });
 
     //initialize the bots
     var botarr = [];
+    var head = document.querySelector('#person').object3D;
+    // var body = document.querySelector('#babybody');
+    // var bodyrot = body.getAttribute("rotation").y;
+    // console.log(bodyrot);
+
+    AFRAME.registerComponent('baby-body', {
+        tick: function() {
+            var el = this.el;
+            var rot = head.rotation.y / 3.14 * 180;
+            if( rot > -45 && rot <= 45){
+                el.setAttribute('rotation', { x: 0, y: 0, z: 0 });
+            }
+            else if( rot > 45 && rot < 135){
+                el.setAttribute('rotation', { x: 0, y: 90, z: 0 });
+            }
+            else if( rot < -45 && rot > -135){
+                el.setAttribute('rotation', { x: 0, y: -90, z: 0 });
+            }
+            else{
+                el.setAttribute('rotation', { x: 0, y: 180, z: 0 });
+            }
+        }
+    });
+
+// AFRAME.registerComponent('bot', {
+//   schema: {
+//         // 'src', `#eyeball-obj`);
+//         // thisbot.setAttribute('mtl', `#eyeball-mtl`);
+//   },
+//   init: function () {
+//     var cam = document.getElementById("active-camera");
+//   },
+//   update: function (x, y, z, rotx, roty, rotz) {
+//         var elpos = this.el.getAttribute("position");
+//         this.x = x;
+//         this.y = y;
+//         this.z = z;
+//         this.rotx = rotx;
+//         this.roty = roty;
+//         this.rotz = rotz;
+//         //this.obj.setAttribute('position', {x: x, y: y, z: z - 4});
+//         this.obj.setAttribute('position', {x: x, y: y, z: z});
+//         this.obj.setAttribute('rotation', {x: rotx, y: roty, z: rotz});
+//         this.obj.flushToDOM();
+//         if(this.currentCamera){
+//             cam.setAttribute("position", { x: x, y: y, z: z + 0.2});
+//             cam.flushToDOM(); 
+//         }
+//   },
+// });
+
+    // AFRAME.registerComponent('camera', {
+    //     tick: function() {
+    //         var el = this.el;
+    //         var rot = head.rotation.y / 3.14 * 180;
+    //         if( rot > -45 && rot <= 45){
+    //             el.setAttribute('rotation', { x: 0, y: 0, z: 0 });
+    //         }
+    //         else if( rot > 45 && rot < 135){
+    //             el.setAttribute('rotation', { x: 0, y: 90, z: 0 });
+    //         }
+    //         else if( rot < -45 && rot > -135){
+    //             el.setAttribute('rotation', { x: 0, y: -90, z: 0 });
+    //         }
+    //         else{
+    //             el.setAttribute('rotation', { x: 0, y: 180, z: 0 });
+    //         }
+    //     }
+    // });
+
+    $('#babyscene').append("<a-collada-model baby-body src='#babybody' scale='.4 .4 .4' position='0 -2.5 -1.5'> </a-collada-model>");
 
     //update function, fixes weird server side timing
     var updatebot = function(i) {
@@ -80,10 +148,10 @@
     }
     var container = new BotContainer();
     database.ref('bots/bot-container').on('value', function(snapshot) {
-        if(snapshot.val() != null){
+        if (snapshot.val() != null) {
             //console.log("container move");
             container.move(snapshot.val().x, snapshot.val().y, snapshot.val().z, snapshot.val().rotx, snapshot.val().roty, snapshot.val().rotz);
-            }
+        }
     });
     // //checks that the bots exist, updates position if the other page is reinitialized
     database.ref('info/botsinitialized').on('value', function(snapshot) {
@@ -96,7 +164,7 @@
             }
             //setup
             setInterval(changeCameraView, 5000);
-            changeCameraView();
+            //changeCameraView();
         } else {
             console.log("the VR side hasn't started up yet!");
             var cam = document.getElementById("active-camera");
@@ -112,50 +180,55 @@
 
         botarr[randomnum].currentCamera = true;
         if (currentCamera != null) {
+            currentCamera.obj.setAttribute("visible", true);
             currentCamera.currentCamera = false;
         }
         currentCamera = botarr[randomnum];
+        currentCamera.obj.setAttribute("visible", false);
+        currentCamera.obj.flushToDOM();
 
         var pos = randombot.getAttribute('position');
         var cam = document.getElementById("active-camera");
         cam.setAttribute("position", { x: pos.x, y: pos.y, z: pos.z });
         cam.flushToDOM();
     }
-    
-    var flash = function(){
+
+    var flash = function() {
         var el = document.querySelector("#flash");
         el.setAttribute("visible", true);
-        document.getElementById("sound").play(); 
+        document.getElementById("sound").play();
         setTimeout(function() {
-            el.setAttribute("visible", false); 
+            el.setAttribute("visible", false);
         }, 200)
-        
     }
+
+    // setInterval(function() {
+
+    //     // var p = document.getElementById("person");
+    //     console.log(p.rotation.y / 3.14 * 180);
+    // }, 1000);
     //toggling visibility 
-    document.body.onkeyup = function(e){
-        if(e.keyCode == 37){
+    document.body.onkeyup = function(e) {
+        if (e.keyCode == 37) {
             var el = document.querySelector("#babyscene");
-            el.setAttribute("visible",false);
+            el.setAttribute("visible", false);
         }
-        if(e.keyCode == 39){
+        if (e.keyCode == 39) {
             var el = document.querySelector("#babyscene");
-            el.setAttribute("visible",true);
+            el.setAttribute("visible", true);
         }
-        if(e.keyCode == 32){
-            
-            console.log(document.querySelector("#person").object3D.rotation); 
+        if (e.keyCode == 32) {
+
+            console.log(document.querySelector("#person").object3D.rotation);
         }
-        if(e.keyCode == 65){
-            flash(); 
+        if (e.keyCode == 65) {
+            flash();
         }
-        if(e.keyCode == 66){ 
+        if (e.keyCode == 66) {
             var r = document.getElementById("person").getAttribute("rotation");
-            console.log(r); 
+            console.log(r);
         }
     }
-    
-
-
     </script>
 </body>
 
