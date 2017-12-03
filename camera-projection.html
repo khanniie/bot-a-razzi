@@ -74,7 +74,7 @@
     var container = new BotContainer();
     database.ref('bots/bot-container').on('value', function(snapshot) {
         if(snapshot.val() != null){
-            console.log("container move");
+            //console.log("container move");
             container.move(snapshot.val().x, snapshot.val().y, snapshot.val().z, snapshot.val().rotx, snapshot.val().roty, snapshot.val().rotz);
             }
     });
