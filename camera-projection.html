@@ -114,7 +114,7 @@
             <a-collada-model src="#tv" scale=".3 .3 .3" position="-.2 1 -2.7"></a-collada-model>
         </a-entity>
 
-        <a-entity id="person" position="0 -1 -1" look-at="#bot-container">
+        <a-entity id="person" position="0 -1 0" look-at="#bot-container">
             <a-collada-model position="0 0 0" src="#babyhead" scale=".4 .4 .4"> </a-collada-model>
         </a-entity>
       
@@ -183,7 +183,7 @@
                 });
             }
         });
-        $('#babyscene').append("<a-collada-model baby-body src='#babybody' scale='.4 .4 .4' position='0 -2.85 -1'> </a-collada-model>");
+        $('#babyscene').append("<a-collada-model baby-body src='#babybody' scale='.4 .4 .4' position='0 -2.85 0'> </a-collada-model>");
         AFRAME.registerComponent('bot', {
             schema: {
                 src: {
@@ -194,13 +194,14 @@
                 }
             },
             init: function() {
-                this.tick = AFRAME.utils.throttleTick(this.tick, 50, this);
+                this.tick = AFRAME.utils.throttleTick(this.tick, 200, this);
                 this.cam = document.getElementById("active-camera");
                 this.id = this.el.id;
             },
             tick: function(t, dt) {
                 var isCam = botarr[parseInt((this.id).slice(3, 4))].currentCamera;
                 var el = this.el;
+                //console.log(this.id);
                 database.ref('bots/' + this.id).once('value', function(snapshot) {
                     el.setAttribute('position', {
                         x: snapshot.val().x,
@@ -226,7 +227,7 @@
         });
         AFRAME.registerComponent('bot-container', {
             init: function() {
-                this.tick = AFRAME.utils.throttleTick(this.tick, 50, this);
+                this.tick = AFRAME.utils.throttleTick(this.tick, 200, this);
             },
             tick: function(t, dt) {
                 var el = this.el;
@@ -246,7 +247,7 @@
                 });
             },
         });
-        $('#babyscene').append("<a-entity id='bot-container' bot-container position='0 0 0' scale='1 1 1'><a-entity look-at='#person' camera id='active-camera' position='0 1.8 1'></a-entity> <a-light id='flash' type='point' color='#FFFFAA' visible='false'></a-light></a-entity>");
+        $('#babyscene').append("<a-entity id='bot-container' bot-container position='0 0 0' scale='0.5 0.5 0.5'><a-entity look-at='#person' camera id='active-camera' position='0 1.8 1'></a-entity> <a-light id='flash' type='point' color='#FFFFAA' visible='false'></a-light></a-entity>");
         var cam = document.getElementById("active-camera");
         // //checks that the bots exist, updates position if the other page is reinitialized
         database.ref('info/botsinitialized').on('value', function(snapshot) {

@@ -5,7 +5,7 @@ var person = document.getElementById('person');
 var botContainer = document.getElementById('bot-container');
 var distance;
 var displacementY = 0.8;
-var displacementZ = 4;
+var displacementZ = 2;
 var botElems = new Array();
 var botsIntialized = false;
 
@@ -110,7 +110,7 @@ function assignContainerPosition() {
   var roty = prev.y + (y-prev.y)*0.04;
   var rotz = prev.z + (z-prev.z)*0.04;
   botContainer.setAttribute('position', `${rotx} ${roty} ${rotz}`);
-  //writeBotData(x, y, z, rotx, roty, rotz, 'bot-container');
+  writeBotData(x, y, z, rotx, roty, rotz, 'bot-container');
 }
 
 function assignBotsPosition() {
@@ -123,7 +123,7 @@ function assignBotsPosition() {
     var rotz = bots[i].rotation.z;
     //if(i==0 && frameCount%10==0){console.log(rotx); console.log(botElems[i])}
     botElems[i].setAttribute('position', `${x} ${y} ${z}`);
-    //writeBotData(x, y, z, rotx, roty, rotz, "bot" + i);
+    writeBotData(x, y, z, rotx, roty, rotz, "bot" + i);
   }
 }
 

@@ -13,6 +13,7 @@ var database = firebase.database();
 database.ref('bots').remove();
 
 function writeBotData(x, y, z, rotx, roty, rotz, botid) {
+    // console.log("writing");
 
     database.ref('bots/' + botid).set({
         x: x,
