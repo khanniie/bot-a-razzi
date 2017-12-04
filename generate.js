@@ -6,7 +6,7 @@ var botContainer = document.getElementById('bot-container');
 var distance;
 // var displacementY = 0.6;
 // var displacementZ = 2;
-var displacementY = 0.65;
+var displacementY = 0.85;
 var displacementZ = 1;
 var botElems = new Array();
 var botsIntialized = false;
