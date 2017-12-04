@@ -88,7 +88,7 @@
     AFRAME.registerComponent('baby-body', {
         tick: function() {
             var el = this.el;
-            var rot = head.rotation.y / 3.14 * 180;
+            var rot = head.rotation.y / 3.1415926535 * 180;
             el.setAttribute('rotation', { x: 0, y: rot, z: 0 });
         }
     });

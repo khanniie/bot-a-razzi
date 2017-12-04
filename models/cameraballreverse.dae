@@ -5,8 +5,8 @@
       <author>Blender User</author>
       <authoring_tool>Blender 2.79.0 commit date:2017-09-11, commit time:10:43, hash:5bd8ac9</authoring_tool>
     </contributor>
-    <created>2017-12-04T01:04:20</created>
-    <modified>2017-12-04T01:04:20</modified>
+    <created>2017-12-03T23:19:37</created>
+    <modified>2017-12-03T23:19:37</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
@@ -214,7 +214,7 @@
   <library_visual_scenes>
     <visual_scene id="Scene" name="Scene">
       <node id="Sphere" name="Sphere" type="NODE">
-        <matrix sid="transform">1 0 0 -1.49012e-8 0 0.009093592 0.9999586 0.2977142 0 -0.9999586 0.009093592 -0.1564003 0 0 0 1</matrix>
+        <matrix sid="transform">1 0 0 0 0 -1.62921e-7 -1 0 0 1 -1.62921e-7 0 0 0 0 1</matrix>
         <instance_geometry url="#Sphere-mesh" name="Sphere">
           <bind_material>
             <technique_common>
@@ -224,7 +224,7 @@
         </instance_geometry>
       </node>
       <node id="Cylinder" name="Cylinder" type="NODE">
-        <matrix sid="transform">0.3326762 0 0 -0.2963927 0 -0.003750938 -0.2651069 -7.11143e-4 0 0.332655 -0.002989281 -0.001353644 0 0 0 1</matrix>
+        <matrix sid="transform">0.3326762 0 0 -0.2963927 0 7.25807e-4 0.2651232 0.297003 0 -0.3326754 5.78427e-4 -0.1577539 0 0 0 1</matrix>
         <instance_geometry url="#Cylinder_009-mesh" name="Cylinder">
           <bind_material>
             <technique_common>
