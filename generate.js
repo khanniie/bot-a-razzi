@@ -4,11 +4,7 @@ var numBots = 6;
 var person = document.getElementById('person');
 var botContainer = document.getElementById('bot-container');
 var distance;
-<<<<<<< HEAD
-var displacementY = 0.8;
-=======
 var displacementY = 0.6;
->>>>>>> origin/master
 var displacementZ = 2;
 var botElems = new Array();
 var botsIntialized = false;

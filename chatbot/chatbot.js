@@ -26,7 +26,7 @@ var createUsername = function(){
 
 var assignto = document.getElementById("other-comments");
 setInterval(function() {
-    if (topcounter > 200) {
+    if (topcounter > 140) {
         $(".comment").each(function() {
             var parsed = parseInt($(this).css('top'));
             if (parsed < 0) {

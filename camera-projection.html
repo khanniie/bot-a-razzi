@@ -29,7 +29,7 @@
     <div id="changecam">
         <p>changing camera...</p>
     </div>
-    <audio id="sound" src="http://www.soundjay.com/button/beep-07.wav"></audio>
+      <audio id="sound" src="sound/sound1.mp3"></audio>
     <a-scene vr-mode-ui="enabled: false" id="babyscene">
         <a-assets>
             <a-asset-item id="chair" src="bedroom-models/chair-textured.dae"></a-asset-item>
@@ -50,16 +50,17 @@
             <a-asset-item id="door" src="bathroom-models/door.dae" crossOrigin="anonymous"></a-asset-item>
             <a-asset-item id="tv" src="bathroom-models/tv.dae" crossOrigin="anonymous"></a-asset-item>
             <a-asset-item id="tile" src="bathroom-models/tile.jpg" crossOrigin="anonymous"></a-asset-item>
-            <a-asset-item id="bot-obj" src="models/better-eyeball.obj" crossOrigin="anonymous"></a-asset-item>
-            <a-asset-item id="bot-mtl" src="models/better-eyeball.mtl" crossOrigin="anonymous"></a-asset-item>
             <a-asset-item id="hospital" src="models/hospital.dae" crossOrigin="anonymous"></a-asset-item>
             <a-asset-item id="babyhead" src="models/baby_head.dae" crossOrigin="anonymous"></a-asset-item>
             <a-asset-item id="babybody" src="models/baby_body.dae" crossOrigin="anonymous"></a-asset-item>
             <a-asset-item id="baby" src="models/baby.dae" crossOrigin="anonymous"></a-asset-item>
+            <a-asset-item id="mom" src="models/momm.dae" crossOrigin="anonymous"></a-asset-item>
+            <a-asset-item id="weeb" src="bedroom-models/weeb.dae" crossOrigin="anonymous"></a-asset-item>
+          
             <a-asset-item id="bot-dae" src="models/cameraball.dae" crossOrigin="anonymous"></a-asset-item>
         </a-assets>
       
-        <a-entity id="scene0" visible="true" scale=".5 .5 .5">
+        <a-entity id="scene0" visible="true" scale=".5 .5 .5" position="0 2 0">
             <a-light type="ambient" color="#44F" intensity=".5"></a-light>
             <a-light type="ambient" color="white" intensity=".3"></a-light>
             <a-light type="point" color="white" position="0 5 0" intensity=".8"></a-light>
@@ -100,25 +101,31 @@
             <a-light type="ambient" color="#FEF" intensity=".7"></a-light>
             <a-light type="point" color="white" position="0 5 0" intensity=".5"></a-light>
             <a-plane shadow="receive: true" material="src: #tile; repeat:10 10" scale="5 5 5" position="0 0 0" rotation="-90 0 0"></a-plane>
-            <a-plane color="#EEA" scale="5 4 4" position="-1.75 2 0" rotation="0 90 0"></a-plane>
-            <a-plane color="#EEA" scale="5 4 4" position="1.75 2 0" rotation="0 -90 0"></a-plane>
+            <a-plane color="#EEA" scale="5 4 4" position="-2 2 0" rotation="0 90 0"></a-plane>
+            <a-plane color="#EEA" scale="5 4 4" position="2 2 0" rotation="0 -90 0"></a-plane>
             <a-plane color="#EEA" scale="4 5 4" position="0 4 0" rotation="90 0 0"></a-plane>
-            <a-plane color="#EEA" scale="4 4 4" position="0 2 -1.5" rotation="0 0 0"></a-plane>
-            <a-plane color="#EEA" scale="4 4 4" position="0 2 1.5" rotation="0 180 0"></a-plane>
-            <a-box position="-2 1.6 -1" rotation="0 0 0" scale=".01 .01 .01" color="#4CC3D9" shadow></a-box>
+            <a-plane color="#EEA" scale="4 4 4" position="0 2 -2.5" rotation="0 0 0"></a-plane>
+            <a-plane color="#EEA" scale="4 4 4" position="0 2 2.5" rotation="0 180 0"></a-plane>
             <a-collada-model src="#sink" scale=".25 .25 .25" position="1 0 .1" rotation="0 180 0"></a-collada-model>
-            <a-collada-model src="#toilet" scale=".18 .18 .18" position="-.4 .2 .2"></a-collada-model>
-            <a-collada-model src="#door" scale=".25 .25 .25" position="-1.7 -.15 -1"></a-collada-model>
-            <a-collada-model src="#trashcan" scale=".18 .18 .18" position=".8 .2 .2"></a-collada-model>
-            <a-collada-model src="#tp" scale=".1 .1 .1" position="-.8 0 1"></a-collada-model>
-            <a-collada-model src="#tv" scale=".3 .3 .3" position="-.2 1 -2.7"></a-collada-model>
+            <a-collada-model src="#toilet" scale=".3 .3 .3" position="-.4 .2 .2"></a-collada-model>
+            <a-collada-model src="#door" scale=".4 .4 .4" position="-1.9 -.15 -1"></a-collada-model>
+            <a-collada-model src="#trashcan" scale=".3 .3 .3" position="1.5 .2 .2"></a-collada-model>
+            <a-collada-model src="#tp" scale=".15 .15 .15" position="-.8 0 1"></a-collada-model>
+            <a-collada-model src="#tv" scale=".5 .5 .5" position="-1.8 1 -4.5"></a-collada-model>
         </a-entity>
 
+<!--
         <a-entity id="person" position="0 -1 0" look-at="#bot-container">
             <a-collada-model position="0 0 0" src="#babyhead" scale=".4 .4 .4"> </a-collada-model>
         </a-entity>
       
+-->
       
+      <a-entity id="personlookat" look-at="#bot-container"> </a-entity>
+      <a-collada-model turns id="person" src="#baby" scale=".2 .2 .2" position="0 .5 0" visible="false"> </a-collada-model>
+      <a-collada-model turns id="person1" src="#weeb"  position="0 .5 0" rotation="90 90 90" visible="false"> </a-collada-model>
+      <a-collada-model turns id="person2" src="#mom" position="0 .5 0" visible="false"> </a-collada-model>
+
       
     </a-scene>
     <!-- scripts! -->
@@ -139,14 +146,13 @@
         firebase.initializeApp(config);
         var database = firebase.database();
         var currentScene = 0;
+        database.ref('scene').on('value', function(snapshot) {
+            changeScene(snapshot.val().x); 
+        }); 
+
         document.body.onkeyup = function(e) {
             if (e.keyCode == 32) {
-                document.querySelector('#scene' + currentScene).setAttribute("visible", false);
-                currentScene = (currentScene + 1) % 3;
-                document.querySelector('#scene' + currentScene).setAttribute("visible", true);
-                database.ref('scene').set({
-                   x: currentScene,
-                });
+              changeScene(currentScene + 1); 
             }
              if (e.keyCode == 65) {
                 database.ref('flash').set({
@@ -155,6 +161,28 @@
                flash(); 
             }
         }
+        
+        var changeScene = function(x) {
+              document.querySelector('#scene' + currentScene).setAttribute("visible", false);
+              document.querySelector('#person').setAttribute("visible", false);
+              document.querySelector('#person').setAttribute("id", "person" + currentScene);
+              currentScene = x % 3;
+              document.querySelector('#scene' + currentScene).setAttribute("visible", true);
+              document.querySelector('#person'+ currentScene).setAttribute("visible", true);
+              document.querySelector('#person'+ currentScene).setAttribute("id", "person");
+              database.ref('scene').set({
+                 x: currentScene,
+              });
+//              if (currentScene == 0)
+//                  document.querySelector("#person").setAttribute("src", "#baby");
+//              else if (currentScene == 1)
+//                  document.querySelector("#person").setAttribute("position", "#weeb");
+//              if (currentScene == 2)
+//                  document.querySelector("#person").setAttribute("position", "#mom");
+
+        }
+        
+        
         var flash = function() {
             var el = document.querySelector("#flash");
             el.setAttribute("visible", true);
@@ -164,6 +192,9 @@
             }, 200)
         }
         
+        database.ref('flash').on('value', function(snapshot) {
+        flash(); 
+        }); 
         //grab number of robots
         var numbots = 6
         database.ref('info/numbots').once('value', function(snapshot) {
@@ -171,8 +202,8 @@
         });
         //initialize the bots
         var botarr = [];
-        var head = document.querySelector('#person').object3D;
-        AFRAME.registerComponent('baby-body', {
+        var head = document.querySelector('#personlookat').object3D;
+        AFRAME.registerComponent('turns', {
             tick: function() {
                 var el = this.el;
                 var rot = head.rotation.y / 3.14 * 180;
@@ -183,15 +214,12 @@
                 });
             }
         });
-        $('#babyscene').append("<a-collada-model baby-body src='#babybody' scale='.4 .4 .4' position='0 -2.85 0'> </a-collada-model>");
+ 
         AFRAME.registerComponent('bot', {
             schema: {
                 src: {
-                    default: '#eyeball-obj'
+                    default: '#bot-daej'
                 },
-                mtl: {
-                    default: '#eyeball-mtl'
-                }
             },
             init: function() {
                 this.tick = AFRAME.utils.throttleTick(this.tick, 200, this);

@@ -10,14 +10,100 @@
     <meta name="author" content="">
     <link rel="icon" href="images/favicon.gif">
     <!--     <link rel="icon" href="bootstrap-3.3.7/favicon.ico"> -->
-    <title>Connie Ye</title>
+    <title>bot-a-razzi</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Hind:300|Roboto:300" rel="stylesheet">
     <script>
     </script>
     <style>
+    #container {
+        width: 100%;
+        height: 100%;
+        border: 1px solid #BBBBBB;
+        position: relative;
+        background-color: #EEEEEE;
+    }
+    #daddycontainer{
+        font-family: Arial, sans-serif;
+        font-size: .8em;
+        color: #444444;
+        width: 100%;
+        height: 300px;
+    }
+    #commentbar{
+        position: absolute;
+        left: 2%;
+        padding: 5px;
+        width: 90%;
+        bottom: 50px;
+        border: 1px solid #BBBBBB;
+    }
+    #comment2bar{
+        position: absolute;
+        left: 2%;
+        height: 20px;
+        width: 90%;
+        bottom: 5px;
+    }
+    #id{
+        position: absolute;
+        left: 2px;
+    }
+    #other-comments{
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+    }
+    .comment{
+        height: 20px;
+        position: absolute;
+        left: 20px;
+        transition-duration: 0.1s;
+    }
+    .blue{
+        color: #005ce6;
+        font-weight: bold;
+    }
+    .red{
+        color: #e60000;
+        font-weight: bold;
+    }
+.pink{
+        color: #ff00ff;
+        font-weight: bold;
+    }
+.green{
+        color: #47d147;
+        font-weight: bold;
+    }
+    .purple{
+        color: #9966ff;
+        font-weight: bold;
+    }
+    #settings{
+        width: 30px;
+        position: absolute;
+        bottom: 5px;
+    }
+    .message{
+        color: #888888;
+    }
+    #send{
+        border: 0px;
+        height: 30px;
+        width: 60px;
+        background-color: #CCCCFF;
+        border-radius: 0px;
+        position: absolute;
+        bottom: 5px;
+        right: 0px;
+    }
     body {
         font-family: 'Roboto', sans-serif;
         font-size: 17px;
@@ -27,7 +113,6 @@
         margin:none;
         background-color: #FAFAFA;
     }
-
     .profile-pic {
         position: absolute;
         border-radius: 50%;
@@ -35,9 +120,7 @@
         width: 65%;
         height: 50%;
     }
-
     .container {}
-
     .box {
         position: relative;
         width: 100%;
@@ -45,7 +128,6 @@
         overflow: hidden;
 /*        box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.2);*/
     }
-
     .box iframe {
         position: absolute;
         /*      top: -100%;*/
@@ -54,16 +136,13 @@
         /*        left: -100%;*/
         border: 0px;
     }
-
     .row {
         padding-top: 10px;
         padding-bottom: 10px;
     }
-
     .username {
         font-size: 30px;
     }
-
     .stats {
         font-size: 14px;
     }
@@ -83,52 +162,120 @@
 
 <body>
     <div class="container">
+        <!--         <div class="row justify-content-start">
+            <div class="col-xs-8">
+                <img src="images/logo.gif" id="logo" />
+            </div>
+            <div class="col-xs-4">
+                <ul class="sidelist">
+                    <li><a href="https://github.com/khanniie/"><img class="small" src="images/github.png" alt="logo"/> github</a></li>
+                    <li><a href="mailto:constany@andrew.cmu.edu"><img class="small" src="images/email.png" alt="logo"/> constany@andrew.cmu.edu</a></li>
+                    <li><a href="https://www.youtube.com/channel/UCngcWj8ILwE4J9pip55zcPw"><img class="small" src="images/youtube.png" alt="logo"/> youtube</a></li>
+                    <li><a href="https://www.instagram.com/meimeithemorkie/"><img class="small" src="images/dog.png" alt="logo"/> my dog's instagram</a></li>
+                </ul>
+            </div>
+        </div> -->
         <div class="row">
-            <div class="col-md-3"><img class="profile-pic" src="images/guy-anime.png"></div>
+            <div class="col-md-3"><img id="pfp" class="profile-pic" src="images/babydp.jpg"></div>
             <div class="col-md-9">
-                <div class="row username">sakura.halyssa_kunoichi<button class="follow-button">follow</button><button class="follow-button">...</button></div>
+                <div class="row username" id="un">120317609pm<button class="follow-button">follow</button><button class="follow-button">...</button></div>
                 <div class="row stats">
                     <div class="col-md-2"><b>666</b> posts</div>
-                    <div class="col-md-3"><b>40.7k</b> followers</div>
-                    <div class="col-md-3"><b>134</b> following</div>
+                    <div class="col-md-3"><b>43</b> followers</div>
+                    <div class="col-md-3"><b>13</b> following</div>
                 </div>
-                <div class="row">👑💐 Sakura Uchiha 👑💐 40.5k👑💐 Hey Stalker !!! 😘 💝 Welcome to sasusaku 🌍💝 🔒50k 💐 ❌HATERS WILL BE BLOCK 🔫 ALL THE PIC ALWAYS CREDS TO THE ARTIST 💞</div>
+                <div class="row" id="desc">the hippest baby in the hospital</div>
             </div>
         </div>
         <br>
         <div class="row justify-content-center">
             <!--           <div class="col-md-1">
             </div> -->
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="box">
                     <iframe id="frame2" src="camera-projection.html"></iframe>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="box">
                     <iframe id="frame1" src="camera-projection.html"></iframe>
                 </div>
             </div>
-<!--             <div class="col-md-4">
+            <div class="col-md-4">
                 <div class="box">
                     <iframe id="frame1" src="camera-projection.html"></iframe>
                 </div>
-            </div> -->
-            <!--             <div class="col-md-1">
-            </div> -->
+            </div>
         </div>
+        <div id="daddycontainer" class="row justify-content-center"><div class="col-md-12"></div>
+        <div id="container">
+            <div id="commentbar"><span class="message">Send a message</span></div><div id="other-comments"></div><div id="comment2bar"><img id="settings" src="https://nest.com/support/images/misc-assets-icons/settings-icon.png"><button id="send">SEND</button></div>
+        </div></div>
     </div>
+    <script src="chatbot/chatbot.js"></script>
     <script>
     var boxes = $('.box').width();
     //boxes = boxes * 0.60;
     $('.box').css({ 'height': boxes + 'px' });
     var profilepic = $('.profile-pic').width();
     $('.profile-pic').css({ 'height': profilepic + 'px' });
+
+    var currentScene = 0;
+    var config = {
+        apiKey: "AIzaSyD8B8P-Bejr47q3FzLG7KO3EF-CvHp6028",
+        authDomain: "bot-a-razzi.firebaseapp.com",
+        databaseURL: "https://bot-a-razzi.firebaseio.com",
+        projectId: "bot-a-razzi",
+        storageBucket: "",
+        messagingSenderId: "24375466887"
+    };
+    firebase.initializeApp(config);
+    var database = firebase.database();
+    var currentScene = 0;
+    document.body.onkeyup = function(e) {
+        if (e.keyCode == 32) {
+          currentScene = (currentScene + 1) % 3; 
+          console.log("spacebar"); 
+          database.ref('scene').set({
+                   x: currentScene,
+          });
+          if (currentScene == 0)
+          {
+                document.getElementById("pfp").src = "images/babydp.jpg";
+                document.getElementById("un").innerHTML = "120317609pm";
+                document.getElementById("desc").innerHTML = "the hippest baby in the hospital";
+          }
+          if (currentScene == 1)
+          {
+                document.getElementById("pfp").src = "images/guy-anime.png";
+                document.getElementById("un").innerHTML = "guy ";
+                document.getElementById("desc").innerHTML = "i like anime";
+         }
+          if (currentScene == 2)
+          {
+                document.getElementById("pfp").src = "images/ocean.jpg";
+                document.getElementById("un").innerHTML = "mom";
+                document.getElementById("desc").innerHTML = "im a mom";
+          }
+          
+        }
+         if (e.keyCode == 65) {
+            database.ref('flash').set({
+               flash: 1,
+            });
+        }
+      setInterval(function() {
+            database.ref('flash').set({
+               flash: 1,
+            });
+      }, 1000); 
+    }
     </script>
     <!-- /.container -->
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+  
 </body>
 
 </html>

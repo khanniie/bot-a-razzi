@@ -1,3 +1,6 @@
+
+
+
 <html>
 
 <head>
@@ -17,7 +20,7 @@
 </head>
 
 <body style="margin:0; height=100%; overflow:hidden;" onunload="setIntializeFalse()">
-      <audio id="sound" src="http://www.soundjay.com/button/beep-07.wav"></audio>
+      <audio id="sound" src="sound/sound1.mp3"></audio>
   <a-scene>
         <a-assets>
             <a-asset-item id="chair" src="bedroom-models/chair-textured.dae"></a-asset-item>
@@ -47,7 +50,7 @@
         </a-assets>
 
 
-        <a-entity id="scene0" visible="true" scale=".5 .5 .5">
+        <a-entity id="scene0" visible="true" scale=".5 .5 .5" position="0 2 0">
             <a-light type="ambient" color="#44F" intensity=".5"></a-light>
             <a-light type="ambient" color="white" intensity=".3"></a-light>
             <a-light type="point" color="white" position="0 5 0" intensity=".8"></a-light>
@@ -81,23 +84,23 @@
             <a-plane src="#legend" scale="1 0.8 1" position="1.74 2.3 -1.6" rotation="0 -90 0"></a-plane>
         </a-entity>
 
+        
         <a-entity id="scene2" visible="false">
 
             <a-light type="ambient" color="#FEF" intensity=".7"></a-light>
             <a-light type="point" color="white" position="0 5 0" intensity=".5"></a-light>
             <a-plane shadow="receive: true" material="src: #tile; repeat:10 10" scale="5 5 5" position="0 0 0" rotation="-90 0 0"></a-plane>
-            <a-plane color="#EEA" scale="5 4 4" position="-1.75 2 0" rotation="0 90 0"></a-plane>
-            <a-plane color="#EEA" scale="5 4 4" position="1.75 2 0" rotation="0 -90 0"></a-plane>
+            <a-plane color="#EEA" scale="5 4 4" position="-2 2 0" rotation="0 90 0"></a-plane>
+            <a-plane color="#EEA" scale="5 4 4" position="2 2 0" rotation="0 -90 0"></a-plane>
             <a-plane color="#EEA" scale="4 5 4" position="0 4 0" rotation="90 0 0"></a-plane>
-            <a-plane color="#EEA" scale="4 4 4" position="0 2 -1.5" rotation="0 0 0"></a-plane>
-            <a-plane color="#EEA" scale="4 4 4" position="0 2 1.5" rotation="0 180 0"></a-plane>
-            <a-box position="-2 1.6 -1" rotation="0 0 0" scale=".01 .01 .01" color="#4CC3D9" shadow></a-box>
+            <a-plane color="#EEA" scale="4 4 4" position="0 2 -2.5" rotation="0 0 0"></a-plane>
+            <a-plane color="#EEA" scale="4 4 4" position="0 2 2.5" rotation="0 180 0"></a-plane>
             <a-collada-model src="#sink" scale=".25 .25 .25" position="1 0 .1" rotation="0 180 0"></a-collada-model>
-            <a-collada-model src="#toilet" scale=".18 .18 .18" position="-.4 .2 .2"></a-collada-model>
-            <a-collada-model src="#door" scale=".25 .25 .25" position="-1.7 -.15 -1"></a-collada-model>
-            <a-collada-model src="#trashcan" scale=".18 .18 .18" position=".8 .2 .2"></a-collada-model>
-            <a-collada-model src="#tp" scale=".1 .1 .1" position="-.8 0 1"></a-collada-model>
-            <a-collada-model src="#tv" scale=".3 .3 .3" position="-.2 1 -2.7"></a-collada-model>
+            <a-collada-model src="#toilet" scale=".3 .3 .3" position="-.4 .2 .2"></a-collada-model>
+            <a-collada-model src="#door" scale=".4 .4 .4" position="-1.8 -.15 -1"></a-collada-model>
+            <a-collada-model src="#trashcan" scale=".3 .3 .3" position="1.5 .2 .2"></a-collada-model>
+            <a-collada-model src="#tp" scale=".15 .15 .15" position="-.8 0 1"></a-collada-model>
+            <a-collada-model src="#tv" scale=".5 .5 .5" position="-1.9 1 -4.7"></a-collada-model>
         </a-entity>
 
         <a-entity camera id="person" position="0 0 0" look-controls rotation="0 0 0"> </a-entity>
@@ -117,16 +120,15 @@
             currentScene = x % 3;
             document.querySelector('#scene' + currentScene).setAttribute("visible", true);
             if (currentScene == 0)
-                document.querySelector("#person").setAttribute("position", "0 0 0");
+                document.querySelector("#person").setAttribute("position", "0 1.5 0");
             else if (currentScene == 1)
-                document.querySelector("#person").setAttribute("position", "0 2 0");
+                document.querySelector("#person").setAttribute("position", "0 1.5 0");
             if (currentScene == 2)
                 document.querySelector("#person").setAttribute("position", "0 1.5 0");
             
     }
     
     database.ref('scene').on('value', function(snapshot) {
-        console.log("hey"); 
         changeScene(snapshot.val().x); 
     }); 
 
