@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Hello, World! - A-Frame</title>
+    <meta name="description" content="Hello, World! - A-Frame">
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
+    <script src="https://a
+                 rame.io/releases/0.5.0/aframe.min.js"></script>
+    <script src="https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/p5.min.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v3.13.1/dist/aframe-extras.min.js"></script>
+
+    <script src="js/database.js"></script>
+</head>
+
+<body onunload="setIntializeFalse()">
+    <a-scene>
+        <a-assets>
+        <a-asset-item id="bot-obj" src="models/better-eyeball.obj" crossOrigin="anonymous"></a-asset-item>
+        <a-asset-item id="bot-mtl" src="models/better-eyeball.mtl" crossOrigin="anonymous"></a-asset-item>
+        <a-asset-item id="hospital" src="models/hospital.dae" crossOrigin="anonymous"></a-asset-item>
+        <a-asset-item id="babyhead" src="models/baby_head.dae" crossOrigin="anonymous"></a-asset-item>
+        <a-asset-item id="babybody" src="models/baby_body.dae" crossOrigin="anonymous"></a-asset-item>
+        <a-asset-item id="skull-model" src="models/box.dae" crossOrigin="anonymous"></a-asset-item>
+        <a-asset-item id="baby" src="models/baby.dae" crossOrigin="anonymous"></a-asset-item>
+    </a-assets>
+        
+        <a-light type="ambient" color="#10A0B0" intensity=".5"></a-light>
+        <a-light type="point" color="white" position="0 5 0" intensity=".8"></a-light>
+        
+        <a-collada-model src="#hospital" position="-.65 -2.1 -.47" rotation="0 90 0"></a-collada-model>
+        
+        <a-entity camera id="person" position="0 0 0" look-controls rotation="0 0 0">
+        </a-entity>
+        
+                
+        
+
+        <a-entity id="bot-container" scale="1 1 1"></a-entity>
+
+    </a-scene>
+    <script type="text/javascript" src="generate.js"></script>
+</body>
+
+</html>
+

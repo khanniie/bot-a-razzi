@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Hello, World! - A-Frame</title>
+    <meta name="description" content="Hello, World! - A-Frame">
+<!--
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/p5.min.js"></script>
+-->
+        <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+    <script src="https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js"></script>
+    
+
+    <script src="js/three.js"></script>
+    <script src="js/aframe-extras.js"></script>
+
+    <script src="js/database.js"></script>
+</head>
+
+<body onunload="setIntializeFalse()">
+    <a-scene>
+        <a-assets>
+        <a-asset-item id="bot-obj" src="models/better-eyeball.obj" crossOrigin="anonymous"></a-asset-item>
+        <a-asset-item id="bot-mtl" src="models/better-eyeball.mtl" crossOrigin="anonymous"></a-asset-item>
+        <a-asset-item id="toilet" src="bathroom-models/toilet.dae" crossOrigin="anonymous"></a-asset-item>
+        <a-asset-item id="trashcan" src="bathroom-models/trashcan.dae" crossOrigin="anonymous"></a-asset-item>
+        <a-asset-item id="sink" src="bathroom-models/sink.dae" crossOrigin="anonymous"></a-asset-item>
+        <a-asset-item id="tp" src="bathroom-models/tp.dae" crossOrigin="anonymous"></a-asset-item>
+        <a-asset-item id="door" src="bathroom-models/door.dae" crossOrigin="anonymous"></a-asset-item>
+        <a-asset-item id="tv" src="bathroom-models/tv.dae" crossOrigin="anonymous"></a-asset-item>
+        <a-asset-item id="baby" src="models/baby2.dae" crossOrigin="anonymous"></a-asset-item>
+
+        <a-asset-item id="tile" src="bathroom-models/tile.jpg" crossOrigin="anonymous"></a-asset-item>
+
+    </a-assets>
+        
+        <a-light type="ambient" color="#FEF" intensity=".7"></a-light>
+        <a-light type="point" color="white" position="0 5 0" intensity=".5"></a-light>
+
+        <a-plane shadow="receive: true" material="src: #tile; repeat:10 10" scale="5 5 5"position="0 0 0" rotation="-90 0 0"></a-plane>
+
+         <a-plane color="#EEA" scale="5 4 4" position="-1.75 2 0" rotation="0 90 0"></a-plane>
+        <a-plane color="#EEA" scale="5 4 4" position="1.75 2 0" rotation="0 -90 0"></a-plane>
+        <a-plane color="#EEA" scale="4 5 4" position="0 4 0" rotation="90 0 0"></a-plane>
+        <a-plane color="#EEA" scale="4 4 4" position="0 2 -1.5" rotation="0 0 0"></a-plane>
+        <a-plane color="#EEA" scale="4 4 4" position="0 2 1.5" rotation="0 180 0"></a-plane>
+        
+        
+        <a-entity camera id="person" position="0 1.5 0" look-controls rotation="0 0 0">
+        </a-entity>
+        <a-box position="-2 1.6 -1" rotation="0 0 0" scale=".01 .01 .01"  color="#4CC3D9" shadow></a-box>
+
+        
+        <a-collada-model src="#sink" scale=".25 .25 .25"  position="1 0 .1" rotation="0 180 0"></a-collada-model>
+                
+        <a-collada-model src="#toilet" scale=".18 .18 .18" position="-.4 .2 .2"></a-collada-model>
+        <a-collada-model src="#door" scale=".25 .25 .25" position="-1.7 -.15 -1"></a-collada-model>
+        <a-collada-model src="#trashcan" scale=".18 .18 .18"  position=".8 .2 .2"></a-collada-model>
+        <a-collada-model src="#tp" scale=".1 .1 .1"  position="-.8 0 1"></a-collada-model>
+        <a-collada-model src="#tv" scale=".3 .3 .3" position="-.2 1 -2.7"></a-collada-model>
+        <a-collada-model collada-animation-mixer collada-model="src: url(models/baby2.dae)" scale=".1 .1 .1" position="-.2 1 0"></a-collada-model>
+
+    </a-scene>
+</body>
+
+</html>
+
+<script> 
+</script>
+

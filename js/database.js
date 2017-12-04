@@ -12,6 +12,8 @@ firebase.initializeApp(config);
 var database = firebase.database();
 database.ref('bots').remove();
 
+
+
 function writeBotData(x, y, z, rotx, roty, rotz, botid) {
 
     database.ref('bots/' + botid).set({
@@ -41,7 +43,7 @@ database.ref('info').set({
 });
 }
 
-
+    
 
 var setIntializeTrue = function(){
     database.ref("info/botsinitialized").set(true);
@@ -50,3 +52,5 @@ var setIntializeTrue = function(){
 var setIntializeFalse = function(){
     database.ref("info/botsinitialized").set(false);
 }
+
+
