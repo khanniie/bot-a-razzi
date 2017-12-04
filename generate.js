@@ -101,9 +101,9 @@ function assignContainerPosition() {
   var x = personPos.x -distance*sin(thetaY);
   var y = personPos.y + displacementY; //-distance*sin(thetaX);
   var z = personPos.z /*-distance*cos(thetaX)*/ -distance*cos(thetaY);
-  var rotx = prev.x + (x-prev.x)*0.01;
-  var roty = prev.y + (y-prev.y)*0.01;
-  var rotz = prev.z + (z-prev.z)*0.01;
+  var rotx = prev.x + (x-prev.x)*0.04;
+  var roty = prev.y + (y-prev.y)*0.04;
+  var rotz = prev.z + (z-prev.z)*0.04;
   botContainer.setAttribute('position', `${rotx} ${roty} ${rotz}`);
   writeBotData(x, y, z, rotx, roty, rotz, 'bot-container');
 }
