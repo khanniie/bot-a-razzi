@@ -17,7 +17,6 @@
             width: 100%;
             height: 100%;
         }
-
         p {
             position: absolute;
             left: 40%;
@@ -128,8 +127,6 @@
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
     <script src="js/Bot.js"></script>
     <script>
-<<<<<<< HEAD
-
         //Initialize Firebase
         var config = {
             apiKey: "AIzaSyD8B8P-Bejr47q3FzLG7KO3EF-CvHp6028",
@@ -142,9 +139,6 @@
         firebase.initializeApp(config);
         var database = firebase.database();
         var currentScene = 0;
-
-
-
         document.body.onkeyup = function(e) {
             if (e.keyCode == 32) {
                 document.querySelector('#scene' + currentScene).setAttribute("visible", false);
@@ -160,62 +154,7 @@
                 });
                flash(); 
             }
-=======
-    //Initialize Firebase
-    var config = {
-        apiKey: "AIzaSyD8B8P-Bejr47q3FzLG7KO3EF-CvHp6028",
-        authDomain: "bot-a-razzi.firebaseapp.com",
-        databaseURL: "https://bot-a-razzi.firebaseio.com",
-        projectId: "bot-a-razzi",
-        storageBucket: "",
-        messagingSenderId: "24375466887"
-    };
-    firebase.initializeApp(config);
-    var database = firebase.database();
-
-    //grab number of robots
-    var numbots = 6
-    database.ref('info/numbots').once('value', function(snapshot) {
-        numbots = snapshot.val();
-    });
-
-    //initialize the bots
-    var botarr = [];
-
-    var head = document.querySelector('#person').object3D;
-
-    AFRAME.registerComponent('baby-body', {
-        tick: function() {
-            var el = this.el;
-            var rot = head.rotation.y / 3.1415926535 * 180;
-            el.setAttribute('rotation', { x: 0, y: rot, z: 0 });
         }
-    });
-
-$('#babyscene').append("<a-collada-model baby-body src='#babybody' scale='.4 .4 .4' position='0 -2.85 -1'> </a-collada-model>");
-
-AFRAME.registerComponent('bot', {
-  schema: {
-        src: {default: '#eyeball-obj'},
-        mtl: {default: '#eyeball-mtl'}
-  },
-  init: function () {
-    this.tick = AFRAME.utils.throttleTick(this.tick, 50, this);
-    this.cam = document.getElementById("active-camera");
-    this.id = this.el.id;
-  },
-  tick: function (t, dt) {
-    var isCam = botarr[parseInt((this.id).slice(3, 4))].currentCamera;
-    var el = this.el;
-    database.ref('bots/' + this.id).once('value', function(snapshot) {
-        el.setAttribute('position', {x: snapshot.val().x, y: snapshot.val().y, z: snapshot.val().z});
-        el.setAttribute('rotation', {x: snapshot.val().rotx, y: snapshot.val().roty, z: snapshot.val().rotz});
-        if(isCam){
-             cam.setAttribute("position", { x: snapshot.val().x, y: snapshot.val().y, z: snapshot.val().z});
-             cam.flushToDOM(); 
->>>>>>> 9ec96177bbc03f55750f775d36b4c7c6ab28ea53
-        }
-
         var flash = function() {
             var el = document.querySelector("#flash");
             el.setAttribute("visible", true);
@@ -225,18 +164,14 @@ AFRAME.registerComponent('bot', {
             }, 200)
         }
         
-
         //grab number of robots
         var numbots = 6
         database.ref('info/numbots').once('value', function(snapshot) {
             numbots = snapshot.val();
         });
-
         //initialize the bots
         var botarr = [];
-
         var head = document.querySelector('#person').object3D;
-
         AFRAME.registerComponent('baby-body', {
             tick: function() {
                 var el = this.el;
@@ -248,9 +183,7 @@ AFRAME.registerComponent('bot', {
                 });
             }
         });
-
         $('#babyscene').append("<a-collada-model baby-body src='#babybody' scale='.4 .4 .4' position='0 -2.85 -1'> </a-collada-model>");
-
         AFRAME.registerComponent('bot', {
             schema: {
                 src: {
@@ -291,7 +224,6 @@ AFRAME.registerComponent('bot', {
                 });
             },
         });
-
         AFRAME.registerComponent('bot-container', {
             init: function() {
                 this.tick = AFRAME.utils.throttleTick(this.tick, 50, this);
@@ -314,11 +246,8 @@ AFRAME.registerComponent('bot', {
                 });
             },
         });
-
         $('#babyscene').append("<a-entity id='bot-container' bot-container position='0 0 0' scale='1 1 1'><a-entity look-at='#person' camera id='active-camera' position='0 1.8 1'></a-entity> <a-light id='flash' type='point' color='#FFFFAA' visible='false'></a-light></a-entity>");
-
         var cam = document.getElementById("active-camera");
-
         // //checks that the bots exist, updates position if the other page is reinitialized
         database.ref('info/botsinitialized').on('value', function(snapshot) {
             $(".bot").remove();
@@ -349,7 +278,6 @@ AFRAME.registerComponent('bot', {
         var changeCameraView = function() {
             var randomnum = Math.floor(Math.random() * numbots);
             var randombot = document.getElementById("bot" + randomnum);
-
             botarr[randomnum].currentCamera = true;
             if (currentCamera != null) {
                 currentCamera.obj.setAttribute("visible", true);
@@ -358,7 +286,6 @@ AFRAME.registerComponent('bot', {
             currentCamera = botarr[randomnum];
             currentCamera.obj.setAttribute("visible", false);
             currentCamera.obj.flushToDOM();
-
             var pos = randombot.getAttribute('position');
             var cam = document.getElementById("active-camera");
             $("#changecam").css("display", "block");
@@ -372,10 +299,6 @@ AFRAME.registerComponent('bot', {
             });
             cam.flushToDOM();
         }
-
-
-
-
     </script>
 </body>
 
