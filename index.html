@@ -21,6 +21,7 @@
     <a-scene>
         <a-assets>
         <a-asset-item id="bot-obj" src="models/better-eyeball.obj" crossOrigin="anonymous"></a-asset-item>
+        <a-asset-item id="bot-dae" src="models/cameraball.dae" crossOrigin="anonymous"></a-asset-item>
         <a-asset-item id="bot-mtl" src="models/better-eyeball.mtl" crossOrigin="anonymous"></a-asset-item>
         <a-asset-item id="hospital" src="models/hospital.dae" crossOrigin="anonymous"></a-asset-item>
         <a-asset-item id="babyhead" src="models/baby_head.dae" crossOrigin="anonymous"></a-asset-item>
@@ -29,11 +30,17 @@
         <a-asset-item id="baby" src="models/baby.dae" crossOrigin="anonymous"></a-asset-item>
     </a-assets>
         
-        <a-light type="ambient" color="#10A0B0" intensity=".5"></a-light>
+        <a-light type="ambient" color="#44F" intensity=".5"></a-light>
         <a-light type="ambient" color="white" intensity=".3"></a-light>
         <a-light type="point" color="white" position="0 5 0" intensity=".8"></a-light>
         
         <a-collada-model src="#hospital" position="-.65 -2.1 -.47" rotation="0 90 0"></a-collada-model>
+              <a-plane color="#333" segments-height="0.05" segments-width="0.05" scale="15 15 4" position="1.5 -5 0" rotation="-90 0 0"></a-plane>
+      <a-plane color="#F88" scale="15 8 1" position="-6 -1 0" rotation="0 90 0"></a-plane>
+      <a-plane color="#F88" scale="15 8 1" position="9 -1 0" rotation="0 -90 0"></a-plane>
+      <a-plane color="#F88" scale="15 15 1" position="1.5 3 0" rotation="90 0 0"></a-plane>
+      <a-plane color="#F88" scale="15 8 1" position="1.5 -1 -7.5" rotation="0 0 0"></a-plane>
+      <a-plane color="#F88" scale="15 8 1" position="1.5 -1 7" rotation="0 180 0"></a-plane>
         
         <a-entity camera id="person" position="0 0 0" look-controls rotation="0 0 0">
         </a-entity>

@@ -27,10 +27,12 @@ function getRandomColor() {
 function generateBots() {
   for (var i=0; i<numBots; i++) {
     
-    var thisbot = document.createElement('a-obj-model');
+    var thisbot = document.createElement('a-collada-model');
     thisbot.setAttribute('id', `bot${i}`);
-    thisbot.setAttribute('src', `#bot-obj`);
-    thisbot.setAttribute('mtl', `#bot-mtl`);
+    thisbot.setAttribute('src', `#bot-dae`);
+    // thisbot.setAttribute('src', `#bot-obj`);
+    // thisbot.setAttribute('mtl', `#bot-mtl`);
+
     // var thisbot = document.createElement('a-entity');
     // thisbot.setAttribute('id', `bot${i}`);
     // thisbot.setAttribute('geometry',"primitive: cone; radius-top:0; radius-bottom: 0.5; height:1;");
@@ -101,9 +103,9 @@ function assignContainerPosition() {
   var x = personPos.x -distance*sin(thetaY);
   var y = personPos.y + displacementY; //-distance*sin(thetaX);
   var z = personPos.z /*-distance*cos(thetaX)*/ -distance*cos(thetaY);
-  var rotx = prev.x + (x-prev.x)*0.01;
-  var roty = prev.y + (y-prev.y)*0.01;
-  var rotz = prev.z + (z-prev.z)*0.01;
+  var rotx = prev.x + (x-prev.x)*0.04;
+  var roty = prev.y + (y-prev.y)*0.04;
+  var rotz = prev.z + (z-prev.z)*0.04;
   botContainer.setAttribute('position', `${rotx} ${roty} ${rotz}`);
   writeBotData(x, y, z, rotx, roty, rotz, 'bot-container');
 }
@@ -151,9 +153,9 @@ class Bot {
     var z = 0;
     var y = personRot.y;
     var x = degrees(-PI + atan(displacementY/displacementZ));
-    var zz = this.rotation.z + (z-this.rotation.z)*0.1;
-    var yy = this.rotation.y + (y-this.rotation.y)*0.1;
-    var xx = this.rotation.x + (x-this.rotation.x)*0.1;
+    var zz = this.rotation.z + (z-this.rotation.z)*0.4;
+    var yy = this.rotation.y + (y-this.rotation.y)*0.4;
+    var xx = this.rotation.x + (x-this.rotation.x)*0.4;
     return createVector(x, y, z);
   }
 
