@@ -18,6 +18,91 @@
     <script>
     </script>
     <style>
+    #container {
+        width: 100%;
+        height: 100%;
+        border: 1px solid #BBBBBB;
+        position: relative;
+        background-color: #EEEEEE;
+    }
+    #daddycontainer{
+        font-family: Arial, sans-serif;
+        font-size: .8em;
+        color: #444444;
+        width: 100%;
+        height: 300px;
+    }
+    #commentbar{
+        position: absolute;
+        left: 2%;
+        padding: 5px;
+        width: 90%;
+        bottom: 50px;
+        border: 1px solid #BBBBBB;
+    }
+    #comment2bar{
+        position: absolute;
+        left: 2%;
+        height: 20px;
+        width: 90%;
+        bottom: 5px;
+    }
+    #id{
+        position: absolute;
+        left: 2px;
+    }
+    #other-comments{
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+    }
+    .comment{
+        height: 20px;
+        position: absolute;
+        left: 20px;
+        transition-duration: 0.1s;
+    }
+    .blue{
+        color: #005ce6;
+        font-weight: bold;
+    }
+    .red{
+        color: #e60000;
+        font-weight: bold;
+    }
+
+.pink{
+        color: #ff00ff;
+        font-weight: bold;
+    }
+
+.green{
+        color: #47d147;
+        font-weight: bold;
+    }
+    .purple{
+        color: #9966ff;
+        font-weight: bold;
+    }
+    #settings{
+        width: 30px;
+        position: absolute;
+        bottom: 5px;
+    }
+    .message{
+        color: #888888;
+    }
+    #send{
+        border: 0px;
+        height: 30px;
+        width: 60px;
+        background-color: #CCCCFF;
+        border-radius: 0px;
+        position: absolute;
+        bottom: 5px;
+        right: 0px;
+    }
     body {
         font-family: 'Roboto', sans-serif;
         font-size: 17px;
@@ -105,7 +190,7 @@
                     <div class="col-md-3"><b>43</b> followers</div>
                     <div class="col-md-3"><b>13</b> following</div>
                 </div>
-                <div class="row">the hippest baby in the hood</div>
+                <div class="row">the hippest baby in the hospital</div>
             </div>
         </div>
         <br>
@@ -127,10 +212,13 @@
                     <iframe id="frame1" src="camera-projection.html"></iframe>
                 </div>
             </div>
-            <!--             <div class="col-md-1">
-            </div> -->
         </div>
+        <div id="daddycontainer" class="row justify-content-center"><div class="col-md-12"></div>
+        <div id="container">
+            <div id="commentbar"><span class="message">Send a message</span></div><div id="other-comments"></div><div id="comment2bar"><img id="settings" src="https://nest.com/support/images/misc-assets-icons/settings-icon.png"><button id="send">SEND</button></div>
+        </div></div>
     </div>
+    <script src="chatbot/chatbot.js"></script>
     <script>
     var boxes = $('.box').width();
     //boxes = boxes * 0.60;
