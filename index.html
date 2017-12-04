@@ -154,14 +154,17 @@
         changeScene(snapshot.val().x); 
     }); 
 
-    var flash = function() {
-        var el = document.querySelector("#flash");
-        el.setAttribute("visible", true);
-        document.getElementById("sound").play();
-        setTimeout(function() {
-            el.setAttribute("visible", false);
+    // var flash = function() {
+    //     var el = document.querySelector("#flash");
+    //     el.setAttribute("visible", true);
+        
+    //     setTimeout(function() {
+    //         el.setAttribute("visible", false);
+    //     }, 200)
+    // }
+    setTimeout(function() {
+          document.getElementById("sound").play();
         }, 200)
-    }
     
     database.ref('flash').on('value', function(snapshot) {
         flash(); 
