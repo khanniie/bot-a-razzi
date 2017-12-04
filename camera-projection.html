@@ -251,6 +251,7 @@
         var cam = document.getElementById("active-camera");
         // //checks that the bots exist, updates position if the other page is reinitialized
         database.ref('info/botsinitialized').on('value', function(snapshot) {
+            console.log($('.bot'));
             $(".bot").remove();
             if (snapshot.val()) {
                 botarr = [];
