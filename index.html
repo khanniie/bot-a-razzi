@@ -125,7 +125,7 @@
             <a-collada-model src="#tv" scale=".5 .5 .5" position="0 1 -4.7"></a-collada-model>
         </a-entity>
 
-        <a-entity camera id="person" position="0 0 0" look-controls rotation="0 0 0"> </a-entity>
+        <a-entity camera id="person" position="0 1.6 0" look-controls rotation="0 0 0"> </a-entity>
 
         <a-entity id="bot-container" scale=".5 .5 .5"> <a-light id='flash' type='point' intensity="0.7" color='#FFFFAA' visible='false'></a-light></a-entity>
 
@@ -142,11 +142,11 @@
             currentScene = x % 3;
             document.querySelector('#scene' + currentScene).setAttribute("visible", true);
             if (currentScene == 0)
-                document.querySelector("#person").setAttribute("position", "0 1.5 0");
+                document.querySelector("#person").setAttribute("position", "0 1.7 0");
             else if (currentScene == 1)
-                document.querySelector("#person").setAttribute("position", "0 1.5 0");
+                document.querySelector("#person").setAttribute("position", "0 1.7 0");
             if (currentScene == 2)
-                document.querySelector("#person").setAttribute("position", "0 1.5 0");
+                document.querySelector("#person").setAttribute("position", "0 1.7 0");
             
     }
     
