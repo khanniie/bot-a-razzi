@@ -4,13 +4,10 @@ var numBots = 6;
 var person = document.getElementById('person');
 var botContainer = document.getElementById('bot-container');
 var distance;
-<<<<<<< HEAD
-var displacementY = 0.6;
-var displacementZ = 2;
-=======
+// var displacementY = 0.6;
+// var displacementZ = 2;
 var displacementY = 0.65;
 var displacementZ = 1;
->>>>>>> 86ee2b6598e2f888534b34dd08c107edc60b735b
 var botElems = new Array();
 var botsIntialized = false;
 
