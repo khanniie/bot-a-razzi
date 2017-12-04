@@ -279,6 +279,7 @@
         var cam = document.getElementById("active-camera");
         // //checks that the bots exist, updates position if the other page is reinitialized
         database.ref('info/botsinitialized').on('value', function(snapshot) {
+            console.log($('.bot'));
             $(".bot").remove();
             if (snapshot.val()) {
                 botarr = [];
@@ -292,6 +293,7 @@
                     changeCameraView();
                 }
             } else {
+                currentCamera= null;
                 console.log("the VR side hasn't started up yet!");
                 var cam = document.getElementById("active-camera");
                 cam.setAttribute("position", {

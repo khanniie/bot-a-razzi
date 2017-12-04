@@ -2,6 +2,7 @@ class Bot {
     constructor(num) {
         var thisbot = document.createElement('a-collada-model');
         thisbot.setAttribute('id', `bot${num}`);
+        thisbot.setAttribute('class', `bot`);
         thisbot.setAttribute('bot', "");
         thisbot.setAttribute('src', `#bot-dae`);
         $('#bot-container').append(thisbot);
