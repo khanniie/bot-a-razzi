@@ -265,6 +265,7 @@
                     changeCameraView();
                 }
             } else {
+                currentCamera= null;
                 console.log("the VR side hasn't started up yet!");
                 var cam = document.getElementById("active-camera");
                 cam.setAttribute("position", {
