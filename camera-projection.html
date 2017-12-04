@@ -202,6 +202,7 @@
         });
         //initialize the bots
         var botarr = [];
+        var timer;
         var head = document.querySelector('#personlookat').object3D;
         AFRAME.registerComponent('turns', {
             tick: function() {
@@ -291,11 +292,12 @@
                     //updatebot(i);
                 }
                 //setup
-                setInterval(changeCameraView, 20000);
+                timer = setInterval(changeCameraView, 20000);
                 if (cam != null) {
                     changeCameraView();
                 }
             } else {
+                clearInterval(timer);
                 currentCamera= null;
                 console.log("the VR side hasn't started up yet!");
                 var cam = document.getElementById("active-camera");
