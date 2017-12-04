@@ -43,7 +43,15 @@
         <a-light type="point" color="white" position="0 5 0" intensity=".8"></a-light>
         <a-light type="ambient" color="white" position="0 5 0" intensity=".2"></a-light>
         <a-light type="ambient" color="#10A0B0" intensity=".5"></a-light>
-        <a-collada-model src="#hospital" position="-.65 -2.1 -2" rotation="0 90 0"></a-collada-model>
+        <a-collada-model src="#hospital" position="-.65 -2.1 -.47" rotation="0 90 0"></a-collada-model>
+
+      <a-plane color="#333" segments-height="0.05" segments-width="0.05" scale="15 15 4" position="1.5 -5 0" rotation="-90 0 0"></a-plane>
+      <a-plane color="#F88" scale="15 8 1" position="-6 -1 0" rotation="0 90 0"></a-plane>
+      <a-plane color="#F88" scale="15 8 1" position="9 -1 0" rotation="0 -90 0"></a-plane>
+      <a-plane color="#F88" scale="15 15 1" position="1.5 3 0" rotation="90 0 0"></a-plane>
+      <a-plane color="#F88" scale="15 8 1" position="1.5 -1 -7.5" rotation="0 0 0"></a-plane>
+      <a-plane color="#F88" scale="15 8 1" position="1.5 -1 7" rotation="0 180 0"></a-plane>
+
         <a-entity id="person" position="0 -1 -1" look-at="#bot-container">
             <a-collada-model position="0 0 0" src="#babyhead" scale=".4 .4 .4"> </a-collada-model>
         </a-entity>
@@ -141,7 +149,7 @@ AFRAME.registerComponent('bot-container', {
                 //updatebot(i);
             }
             //setup
-            setInterval(changeCameraView, 30000);
+            setInterval(changeCameraView, 20000);
             if(cam != null){
                 changeCameraView();
             } 

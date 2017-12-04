@@ -151,9 +151,9 @@ class Bot {
     var z = 0;
     var y = personRot.y;
     var x = degrees(-PI + atan(displacementY/displacementZ));
-    var zz = this.rotation.z + (z-this.rotation.z)*0.1;
-    var yy = this.rotation.y + (y-this.rotation.y)*0.1;
-    var xx = this.rotation.x + (x-this.rotation.x)*0.1;
+    var zz = this.rotation.z + (z-this.rotation.z)*0.4;
+    var yy = this.rotation.y + (y-this.rotation.y)*0.4;
+    var xx = this.rotation.x + (x-this.rotation.x)*0.4;
     return createVector(x, y, z);
   }
 
