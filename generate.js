@@ -27,10 +27,12 @@ function getRandomColor() {
 function generateBots() {
   for (var i=0; i<numBots; i++) {
     
-    var thisbot = document.createElement('a-obj-model');
+    var thisbot = document.createElement('a-collada-model');
     thisbot.setAttribute('id', `bot${i}`);
-    thisbot.setAttribute('src', `#bot-obj`);
-    thisbot.setAttribute('mtl', `#bot-mtl`);
+    thisbot.setAttribute('src', `#bot-dae`);
+    // thisbot.setAttribute('src', `#bot-obj`);
+    // thisbot.setAttribute('mtl', `#bot-mtl`);
+
     // var thisbot = document.createElement('a-entity');
     // thisbot.setAttribute('id', `bot${i}`);
     // thisbot.setAttribute('geometry',"primitive: cone; radius-top:0; radius-bottom: 0.5; height:1;");
