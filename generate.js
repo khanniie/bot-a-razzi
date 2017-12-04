@@ -1,5 +1,4 @@
-
-  //container for all bots. All bots flock around its position
+//container for all bots. All bots flock around its position
   //eventually animate this to make it kinda follow the back of the person
 var numBots = 6;
 var person = document.getElementById('person');
@@ -238,5 +237,3 @@ class Bot {
     return steer;
   }
 }
-
-
