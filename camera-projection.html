@@ -204,18 +204,19 @@
         }
         
         
-        // var flash = function() {
-        //     var el = document.querySelector("#flash");
-        //     el.setAttribute("visible", true);
-        //     // document.getElementById("sound").play();
-        //     setTimeout(function() {
-        //         el.setAttribute("visible", false);
-        //     }, 200)
-        // }
+        var flash = function() {
+            var el = document.querySelector("#flash");
+            el.setAttribute("visible", true);
+            // document.getElementById("sound").play();
+            setTimeout(function() {
+                el.setAttribute("visible", false);
+            }, 200)
+        }
         
-        database.ref('flash').on('value', function(snapshot) {
-        flash(); 
-        }); 
+        // database.ref('flash').on('value', function(snapshot) {
+        // flash(); 
+        // }); 
+        
         //grab number of robots
         var numbots = 6
         database.ref('info/numbots').once('value', function(snapshot) {
