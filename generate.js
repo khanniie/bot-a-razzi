@@ -1,5 +1,4 @@
-
-  //container for all bots. All bots flock around its position
+//container for all bots. All bots flock around its position
   //eventually animate this to make it kinda follow the back of the person
 var numBots = 6;
 var person = document.getElementById('person');
@@ -118,7 +117,7 @@ function assignBotsPosition() {
     var rotx = bots[i].rotation.x;
     var roty = bots[i].rotation.y;
     var rotz = bots[i].rotation.z;
-    if(i==0)console.log(rotx);
+    if(i==0)
     botElems[i].setAttribute('position', `${x} ${y} ${z}`);
     botElems[i].setAttribute('rotation', `${rotx} ${roty} ${rotz}`)
     //console.log(x, y, z, rotx, roty, rotz, "bot" + i);
@@ -242,5 +241,3 @@ class Bot {
     return steer;
   }
 }
-
-
