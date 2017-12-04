@@ -4,8 +4,8 @@ var numBots = 6;
 var person = document.getElementById('person');
 var botContainer = document.getElementById('bot-container');
 var distance;
-var displacementY = 0.8;
-var displacementZ = 4;
+var displacementY = 0;
+var displacementZ = 1;
 var botElems = new Array();
 var botsIntialized = false;
 
@@ -117,7 +117,6 @@ function assignBotsPosition() {
     var rotx = bots[i].rotation.x;
     var roty = bots[i].rotation.y;
     var rotz = bots[i].rotation.z;
-    if(i==0)console.log(rotx);
     botElems[i].setAttribute('position', `${x} ${y} ${z}`);
     botElems[i].setAttribute('rotation', `${rotx} ${roty} ${rotz}`)
     //console.log(x, y, z, rotx, roty, rotz, "bot" + i);
