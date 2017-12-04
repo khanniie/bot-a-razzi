@@ -6,14 +6,27 @@
     <title>baby</title>
     <meta name="description" content="Hello, World! - A-Frame">
     <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-look-at-component@0.5.1/dist/aframe-look-at-component.min.js"></script>
+    <script src="js/aframe-look-at.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
+    <style>
+        #changecam{
+            position: relative;
+            display: none;
+            background-color: black;
+            color: white;
+            width: 100%;
+            height:100%;
+        }
+        p{
+            position: absolute;
+            left: 40%;
+            top: 45%;
+        }
+    </style>
 </head>
 
 <body>
-    <!--     <script> 
-
-    </script> -->
+    <div id="changecam"><p>changing camera...</p></div>
     <audio id="sound" src="http://www.soundjay.com/button/beep-07.wav"></audio>
     <a-scene vr-mode-ui="enabled: false" id="babyscene">
         <a-assets>
@@ -22,8 +35,8 @@
             <a-asset-item id="eyeball-obj" src="models/better-eyeball.obj" crossOrigin="anonymous"></a-asset-item>
             <a-asset-item id="eyeball-mtl" src="models/better-eyeball.mtl" crossOrigin="anonymous"></a-asset-item>
             <a-asset-item id="hospital" src="models/hospital.dae" crossOrigin="anonymous"></a-asset-item>
-            <a-asset-item id="babyhead" src="models/baby_head.dae" crossOrigin="anonymous"></a-asset-item>
-            <a-asset-item id="babybody" src="models/baby_body.dae" crossOrigin="anonymous"></a-asset-item>
+<!--             <a-asset-item id="babyhead" src="models/baby_head.dae" crossOrigin="anonymous"></a-asset-item>
+            <a-asset-item id="babybody" src="models/baby_body.dae" crossOrigin="anonymous"></a-asset-item> -->
             <a-asset-item id="skull-model" src="models/box.dae" crossOrigin="anonymous"></a-asset-item>
             <a-asset-item id="baby" src="models/baby.dae" crossOrigin="anonymous"></a-asset-item>
         </a-assets>
@@ -31,12 +44,8 @@
         <a-light type="ambient" color="white" position="0 5 0" intensity=".2"></a-light>
         <a-light type="ambient" color="#10A0B0" intensity=".5"></a-light>
         <a-collada-model src="#hospital" position="-.65 -2.1 -.47" rotation="0 90 0"></a-collada-model>
-        <a-entity id="person" position="0 -.65 -1.5" look-at="#bot-container">
+        <a-entity id="person" position="0 -1 -1" look-at="#bot-container">
             <a-collada-model position="0 0 0" src="#babyhead" scale=".4 .4 .4"> </a-collada-model>
-        </a-entity>
-        <a-entity id="bot-container" position="0 0 0" scale="1 1 1">
-            <a-entity look-at="#person" camera id="active-camera" position="0 1.8 1"></a-entity>
-            <a-light id="flash" type="point" color="#FFFFAA" visible="false"></a-light>
         </a-entity>
     </a-scene>
     <!-- scripts! -->
@@ -65,68 +74,39 @@
 
     //initialize the bots
     var botarr = [];
+
     var head = document.querySelector('#person').object3D;
-    // var body = document.querySelector('#babybody');
-    // var bodyrot = body.getAttribute("rotation").y;
-    // console.log(bodyrot);
 
-    AFRAME.registerComponent('baby-body', {
-        tick: function() {
-            var el = this.el;
-            var rot = head.rotation.y / 3.14 * 180;
-            if( rot > -45 && rot <= 45){
-                el.setAttribute('rotation', { x: 0, y: 0, z: 0 });
-            }
-            else if( rot > 45 && rot < 135){
-                el.setAttribute('rotation', { x: 0, y: 90, z: 0 });
-            }
-            else if( rot < -45 && rot > -135){
-                el.setAttribute('rotation', { x: 0, y: -90, z: 0 });
-            }
-            else{
-                el.setAttribute('rotation', { x: 0, y: 180, z: 0 });
-            }
-        }
-    });
-
-// AFRAME.registerComponent('bot', {
-//   schema: {
-//         // 'src', `#eyeball-obj`);
-//         // thisbot.setAttribute('mtl', `#eyeball-mtl`);
-//   },
-//   init: function () {
-//     var cam = document.getElementById("active-camera");
-//   },
-//   update: function (x, y, z, rotx, roty, rotz) {
-//         var elpos = this.el.getAttribute("position");
-//         this.x = x;
-//         this.y = y;
-//         this.z = z;
-//         this.rotx = rotx;
-//         this.roty = roty;
-//         this.rotz = rotz;
-//         //this.obj.setAttribute('position', {x: x, y: y, z: z - 4});
-//         this.obj.setAttribute('position', {x: x, y: y, z: z});
-//         this.obj.setAttribute('rotation', {x: rotx, y: roty, z: rotz});
-//         this.obj.flushToDOM();
-//         if(this.currentCamera){
-//             cam.setAttribute("position", { x: x, y: y, z: z + 0.2});
-//             cam.flushToDOM(); 
-//         }
-//   },
-// });
-
-    // AFRAME.registerComponent('camera', {
+    // AFRAME.registerComponent('baby-body', {
     //     tick: function() {
+
     //         var el = this.el;
     //         var rot = head.rotation.y / 3.14 * 180;
-    //         if( rot > -45 && rot <= 45){
+    //         if( rot > -30 && rot <= 30){
     //             el.setAttribute('rotation', { x: 0, y: 0, z: 0 });
     //         }
-    //         else if( rot > 45 && rot < 135){
+    //         else if( rot > 30 && rot <= 60){
+    //             el.setAttribute('rotation', { x: 0, y: 0, z: 0 });
+    //         }
+    //         else if( rot <= -30 && rot > -60){
     //             el.setAttribute('rotation', { x: 0, y: 90, z: 0 });
     //         }
-    //         else if( rot < -45 && rot > -135){
+    //         else if( rot > 60 && rot < 90){
+    //             el.setAttribute('rotation', { x: 0, y: -90, z: 0 });
+    //         }
+    //         else if( rot < -60 && rot > -90){
+    //             el.setAttribute('rotation', { x: 0, y: -90, z: 0 });
+    //         }
+    //         else if( rot < -90 && rot > -120){
+    //             el.setAttribute('rotation', { x: 0, y: -90, z: 0 });
+    //         }
+    //         else if( rot > 90 && rot < 120){
+    //             el.setAttribute('rotation', { x: 0, y: -90, z: 0 });
+    //         }
+    //         else if( rot < -120 && rot > -150){
+    //             el.setAttribute('rotation', { x: 0, y: -90, z: 0 });
+    //         }
+    //         else if( rot < -150 && rot > -180){
     //             el.setAttribute('rotation', { x: 0, y: -90, z: 0 });
     //         }
     //         else{
@@ -135,24 +115,52 @@
     //     }
     // });
 
-    $('#babyscene').append("<a-collada-model baby-body src='#babybody' scale='.4 .4 .4' position='0 -2.5 -1.5'> </a-collada-model>");
+//$('#babyscene').append("<a-collada-model baby-body src='#babybody' scale='.4 .4 .4' position='0 -2.85 -1'> </a-collada-model>");
 
-    //update function, fixes weird server side timing
-    var updatebot = function(i) {
-        database.ref('bots/' + "bot" + i).on('value', function(snapshot) {
-            var bot = botarr[i];
+AFRAME.registerComponent('bot', {
+  schema: {
+        src: {default: '#eyeball-obj'},
+        mtl: {default: '#eyeball-mtl'}
+  },
+  init: function () {
+    this.tick = AFRAME.utils.throttleTick(this.tick, 50, this);
+    this.cam = document.getElementById("active-camera");
+    this.id = this.el.id;
+  },
+  tick: function (t, dt) {
+    var isCam = botarr[parseInt((this.id).slice(3, 4))].currentCamera;
+    var el = this.el;
+    database.ref('bots/' + this.id).once('value', function(snapshot) {
+        el.setAttribute('position', {x: snapshot.val().x, y: snapshot.val().y, z: snapshot.val().z});
+        el.setAttribute('rotation', {x: snapshot.val().rotx, y: snapshot.val().roty, z: snapshot.val().rotz});
+        if(isCam){
+             cam.setAttribute("position", { x: snapshot.val().x, y: snapshot.val().y, z: snapshot.val().z});
+             cam.flushToDOM(); 
+        }
+        el.flushToDOM();
+  });
+  },
+});
+
+AFRAME.registerComponent('bot-container', {
+  init: function () {
+    this.tick = AFRAME.utils.throttleTick(this.tick, 50, this);
+  },
+  tick: function (t, dt) {
+    var el = this.el;
+    database.ref('bots/bot-container').once('value', function(snapshot) {
             if (snapshot.val() != null) {
-                bot.move(snapshot.val().x, snapshot.val().y, snapshot.val().z, snapshot.val().rotx, snapshot.val().roty, snapshot.val().rotz);
-            }
-        });
-    }
-    var container = new BotContainer();
-    database.ref('bots/bot-container').on('value', function(snapshot) {
-        if (snapshot.val() != null) {
-            //console.log("container move");
-            container.move(snapshot.val().x, snapshot.val().y, snapshot.val().z, snapshot.val().rotx, snapshot.val().roty, snapshot.val().rotz);
+            el.setAttribute('position', {x: snapshot.val().x, y: snapshot.val().y, z: snapshot.val().z});
+            el.setAttribute('rotation', {x: snapshot.val().rotx, y: snapshot.val().roty, z: snapshot.val().rotz});
         }
     });
+  },
+});
+
+    $('#babyscene').append("<a-entity id='bot-container' bot-container position='0 0 0' scale='1 1 1'><a-entity look-at='#person' camera id='active-camera' position='0 1.8 1'></a-entity> <a-light id='flash' type='point' color='#FFFFAA' visible='false'></a-light></a-entity>");
+
+    var cam = document.getElementById("active-camera");
+    
     // //checks that the bots exist, updates position if the other page is reinitialized
     database.ref('info/botsinitialized').on('value', function(snapshot) {
         $(".bot").remove();
@@ -160,11 +168,13 @@
             botarr = [];
             for (var i = 0; i < numbots; i++) {
                 botarr.push(new Bot(i));
-                updatebot(i);
+                //updatebot(i);
             }
             //setup
-            setInterval(changeCameraView, 5000);
-            //changeCameraView();
+            setInterval(changeCameraView, 30000);
+            if(cam != null){
+                changeCameraView();
+            } 
         } else {
             console.log("the VR side hasn't started up yet!");
             var cam = document.getElementById("active-camera");
@@ -189,6 +199,10 @@
 
         var pos = randombot.getAttribute('position');
         var cam = document.getElementById("active-camera");
+        $("#changecam").css("display", "block");
+        setTimeout(function(){
+            $("#changecam").css("display", "none");
+        }, 600);
         cam.setAttribute("position", { x: pos.x, y: pos.y, z: pos.z });
         cam.flushToDOM();
     }
@@ -202,11 +216,6 @@
         }, 200)
     }
 
-    // setInterval(function() {
-
-    //     // var p = document.getElementById("person");
-    //     console.log(p.rotation.y / 3.14 * 180);
-    // }, 1000);
     //toggling visibility 
     document.body.onkeyup = function(e) {
         if (e.keyCode == 37) {
