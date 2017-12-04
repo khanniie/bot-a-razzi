@@ -117,8 +117,8 @@
         position: absolute;
         border-radius: 50%;
         left: 10%;
-        width: 65%;
-        height: 50%;
+        width: 50%;
+/*        height: 50%;*/
     }
     .container {}
     .box {
@@ -180,9 +180,9 @@
             <div class="col-md-9">
                 <div class="row username" id="un">120317609pm<button class="follow-button">follow</button><button class="follow-button">...</button></div>
                 <div class="row stats">
-                    <div class="col-md-2"><b>666</b> posts</div>
-                    <div class="col-md-3"><b>43</b> followers</div>
-                    <div class="col-md-3"><b>13</b> following</div>
+                    <div class="col-md-2"><b id = "postnum" >666</b> posts</div>
+                    <div class="col-md-3"><b id = "followernum" >43</b> followers</div>
+                    <div class="col-md-3"><b id = "followingnum" >13</b> following</div>
                 </div>
                 <div class="row" id="desc">the hippest baby in the hospital</div>
             </div>
@@ -191,17 +191,12 @@
         <div class="row justify-content-center">
             <!--           <div class="col-md-1">
             </div> -->
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="box">
                     <iframe id="frame2" src="camera-projection.html"></iframe>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="box">
-                    <iframe id="frame1" src="camera-projection.html"></iframe>
-                </div>
-            </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="box">
                     <iframe id="frame1" src="camera-projection.html"></iframe>
                 </div>
@@ -214,7 +209,7 @@
     </div>
     <script src="chatbot/chatbot.js"></script>
     <script>
-    var boxes = $('.box').width();
+    var boxes = $('.box').width() * 0.75;
     //boxes = boxes * 0.60;
     $('.box').css({ 'height': boxes + 'px' });
     var profilepic = $('.profile-pic').width();
@@ -231,7 +226,36 @@
     };
     firebase.initializeApp(config);
     var database = firebase.database();
-    var currentScene = 0;
+
+    database.ref('scene').once('value', function(snapshot){
+        if (snapshot.val().x == 0)
+          {
+                document.getElementById("pfp").src = "images/babydp.jpg";
+                document.getElementById("un").innerHTML = "120317609pm";
+                document.getElementById("desc").innerHTML = "the hippest baby in the hospital";
+                document.getElementById("postnum").innerHTML = "10";
+                document.getElementById("followernum").innerHTML = "43";
+                document.getElementById("followingnum").innerHTML = "13";
+          }
+          if (snapshot.val().x == 1)
+          {
+                document.getElementById("pfp").src = "images/guy-anime.png";
+                document.getElementById("un").innerHTML = "IUteamstarcandy";
+                document.getElementById("desc").innerHTML = "👑💐 Sakura Uchiha 👑💐 40.5k👑💐 Hey Stalker !!! 😘 💝 Welcome to sasusaku 🌍💝 🔒50k 💐 ❌HATERS WILL BE BLOCK 🔫 ALL THE PIC ALWAYS CREDS TO THE ARTIST 💞";
+                document.getElementById("postnum").innerHTML = "666";
+                document.getElementById("followernum").innerHTML = "47k";
+                document.getElementById("followingnum").innerHTML = "233";
+         }
+          if (snapshot.val().x == 2)
+          {
+                document.getElementById("pfp").src = "images/mom-profile.png";
+                document.getElementById("un").innerHTML = "mrsburns00";
+                document.getElementById("desc").innerHTML = "Wife. Mama. Writer. Volunteer. Friend. Influencer.";
+                document.getElementById("postnum").innerHTML = "401";
+                document.getElementById("followernum").innerHTML = "422";
+                document.getElementById("followingnum").innerHTML = "401";
+          }
+    });
     document.body.onkeyup = function(e) {
         if (e.keyCode == 32) {
           currentScene = (currentScene + 1) % 3; 
@@ -244,18 +268,27 @@
                 document.getElementById("pfp").src = "images/babydp.jpg";
                 document.getElementById("un").innerHTML = "120317609pm";
                 document.getElementById("desc").innerHTML = "the hippest baby in the hospital";
+                document.getElementById("postnum").innerHTML = "10";
+                document.getElementById("followernum").innerHTML = "43";
+                document.getElementById("followingnum").innerHTML = "13";
           }
           if (currentScene == 1)
           {
                 document.getElementById("pfp").src = "images/guy-anime.png";
-                document.getElementById("un").innerHTML = "guy ";
-                document.getElementById("desc").innerHTML = "i like anime";
+                document.getElementById("un").innerHTML = "IUteamstarcandy";
+                document.getElementById("desc").innerHTML = "👑💐 Sakura Uchiha 👑💐 40.5k👑💐 Hey Stalker !!! 😘 💝 Welcome to sasusaku 🌍💝 🔒50k 💐 ❌HATERS WILL BE BLOCK 🔫 ALL THE PIC ALWAYS CREDS TO THE ARTIST 💞";
+                document.getElementById("postnum").innerHTML = "666";
+                document.getElementById("followernum").innerHTML = "47k";
+                document.getElementById("followingnum").innerHTML = "233";
          }
           if (currentScene == 2)
           {
-                document.getElementById("pfp").src = "images/ocean.jpg";
-                document.getElementById("un").innerHTML = "mom";
-                document.getElementById("desc").innerHTML = "im a mom";
+                document.getElementById("pfp").src = "images/mom-profile.png";
+                document.getElementById("un").innerHTML = "mrsburns00";
+                document.getElementById("desc").innerHTML = "Wife. Mama. Writer. Volunteer. Friend. Influencer.";
+                document.getElementById("postnum").innerHTML = "401";
+                document.getElementById("followernum").innerHTML = "422";
+                document.getElementById("followingnum").innerHTML = "401";
           }
           
         }
@@ -268,7 +301,7 @@
             database.ref('flash').set({
                flash: 1,
             });
-      }, 1000); 
+      }, 2500); 
     }
     </script>
     <!-- /.container -->

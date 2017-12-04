@@ -5,7 +5,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Hello, World! - A-Frame</title>
+    <title>VR SiDE</title>
     <meta name="description" content="Hello, World! - A-Frame">
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
@@ -122,12 +122,12 @@
             <a-collada-model src="#door" scale=".4 .4 .4" position="-1.8 -.15 -1"></a-collada-model>
             <a-collada-model src="#trashcan" scale=".3 .3 .3" position="1.5 .2 .2"></a-collada-model>
             <a-collada-model src="#tp" scale=".15 .15 .15" position="-.8 0 1"></a-collada-model>
-            <a-collada-model src="#tv" scale=".5 .5 .5" position="-1.9 1 -4.7"></a-collada-model>
+            <a-collada-model src="#tv" scale=".5 .5 .5" position="0 1 -4.7"></a-collada-model>
         </a-entity>
 
         <a-entity camera id="person" position="0 0 0" look-controls rotation="0 0 0"> </a-entity>
 
-        <a-entity id="bot-container" scale=".5 .5 .5"> <a-light id='flash' type='point' color='#FFFFAA' visible='false'></a-light></a-entity>
+        <a-entity id="bot-container" scale=".5 .5 .5"> <a-light id='flash' type='point' intensity="0.7" color='#FFFFAA' visible='false'></a-light></a-entity>
 
 
     </a-scene>

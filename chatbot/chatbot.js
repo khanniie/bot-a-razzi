@@ -33,7 +33,6 @@ setInterval(function() {
                 $(this).remove();
             }
             var newtop = (parsed - 30) + "px";
-            console.log(newtop);
             $(this).css('top', newtop);
         });
     }

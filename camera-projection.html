@@ -111,7 +111,7 @@
             <a-collada-model src="#door" scale=".4 .4 .4" position="-1.9 -.15 -1"></a-collada-model>
             <a-collada-model src="#trashcan" scale=".3 .3 .3" position="1.5 .2 .2"></a-collada-model>
             <a-collada-model src="#tp" scale=".15 .15 .15" position="-.8 0 1"></a-collada-model>
-            <a-collada-model src="#tv" scale=".5 .5 .5" position="-1.8 1 -4.5"></a-collada-model>
+            <a-collada-model src="#tv" scale=".5 .5 .5" position="0 1 -4.5"></a-collada-model>
         </a-entity>
 
 <!--
@@ -186,7 +186,7 @@
         var flash = function() {
             var el = document.querySelector("#flash");
             el.setAttribute("visible", true);
-            document.getElementById("sound").play();
+            // document.getElementById("sound").play();
             setTimeout(function() {
                 el.setAttribute("visible", false);
             }, 200)
@@ -231,7 +231,8 @@
                 var el = this.el;
                 //console.log(this.id);
                 database.ref('bots/' + this.id).once('value', function(snapshot) {
-                    el.setAttribute('position', {
+                    if(snapshot!=null){
+                        el.setAttribute('position', {
                         x: snapshot.val().x,
                         y: snapshot.val().y,
                         z: snapshot.val().z
@@ -250,6 +251,8 @@
                         cam.flushToDOM();
                     }
                     el.flushToDOM();
+                    }
+                    
                 });
             },
         });
