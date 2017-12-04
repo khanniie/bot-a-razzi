@@ -4,7 +4,11 @@ var numBots = 6;
 var person = document.getElementById('person');
 var botContainer = document.getElementById('bot-container');
 var distance;
+<<<<<<< HEAD
 var displacementY = 0.8;
+=======
+var displacementY = 0.6;
+>>>>>>> origin/master
 var displacementZ = 2;
 var botElems = new Array();
 var botsIntialized = false;
@@ -55,8 +59,16 @@ var maxV = 0.01;
 var maxA = 0.002;
 var range = 2.5;
 
+var sounds;
+
 function preload() {
   generateBots();
+  sounds = new Array();
+  sounds[0] = loadSound('sound/sound1.mp3');
+  sounds[1] = loadSound('sound/sound2.mp3');
+  sounds[2] = loadSound('sound/sound3.mp3');
+  sounds[3] = loadSound('sound/sound4.mp3');
+  sounds[4] = loadSound('sound/sound5.mp3');
 }
 
 function setup() {
@@ -67,6 +79,17 @@ function setup() {
   }
   personPrev = createVector(0,0,0);
   personPos = createVector(0,0,0);
+
+  var playDelay = function (sound) {
+    setInterval(sound.play(), random(500, 5000));
+  }
+  for(var i=0; i<sounds.length; i++) {
+    var thissound = sounds[i];
+    thissound.onended(function(thissound){setInterval(thissound.play(), random(500, 3000))});
+  }
+  for(var i=0; i<sounds.length; i++) {
+    sounds[i].play();
+  }
 }
 
 function draw() {
