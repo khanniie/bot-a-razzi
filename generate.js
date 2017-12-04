@@ -30,6 +30,7 @@ function generateBots() {
     var thisbot = document.createElement('a-collada-model');
     thisbot.setAttribute('id', `bot${i}`);
     thisbot.setAttribute('src', `#bot-dae`);
+    thisbot.setAttribute('look-at', `#person`)
     // thisbot.setAttribute('src', `#bot-obj`);
     // thisbot.setAttribute('mtl', `#bot-mtl`);
 
@@ -41,7 +42,6 @@ function generateBots() {
     botElems[i] = thisbot;
   }
 }
-generateBots();
 
 //-------------------------- p5 portion --------------------------------
 
@@ -56,11 +56,15 @@ var maxV = 0.01;
 var maxA = 0.002;
 var range = 2.5;
 
+function preload() {
+  generateBots();
+}
+
 function setup() {
   noCanvas();
   distance = Math.sqrt(sq(displacementY) + sq(displacementZ));
   for(var i=0; i<numBots; i++){
-    bots[i] = new Bot();
+    bots[i] = new Bot(botElems[i]);
   }
   personPrev = createVector(0,0,0);
   personPos = createVector(0,0,0);
@@ -107,7 +111,7 @@ function assignContainerPosition() {
   var roty = prev.y + (y-prev.y)*0.04;
   var rotz = prev.z + (z-prev.z)*0.04;
   botContainer.setAttribute('position', `${rotx} ${roty} ${rotz}`);
-  writeBotData(x, y, z, rotx, roty, rotz, 'bot-container');
+  //writeBotData(x, y, z, rotx, roty, rotz, 'bot-container');
 }
 
 function assignBotsPosition() {
@@ -118,21 +122,19 @@ function assignBotsPosition() {
     var rotx = bots[i].rotation.x;
     var roty = bots[i].rotation.y;
     var rotz = bots[i].rotation.z;
-    if(i==0)console.log(rotx);
+    //if(i==0 && frameCount%10==0){console.log(rotx); console.log(botElems[i])}
     botElems[i].setAttribute('position', `${x} ${y} ${z}`);
-    botElems[i].setAttribute('rotation', `${rotx} ${roty} ${rotz}`)
-    //console.log(x, y, z, rotx, roty, rotz, "bot" + i);
-    writeBotData(x, y, z, rotx, roty, rotz, "bot" + i);
-    //writeBotData(x, y, z, "bot" + i);
+    //writeBotData(x, y, z, rotx, roty, rotz, "bot" + i);
   }
 }
 
 class Bot {
-  constructor() {
+  constructor(ref) {
     this.coord = createVector(random(-range,range),random(-range,range),random(-range,range));
     this.velocity = createVector(0,0,0);
     this.acceleration = createVector(0,0,0);
     this.rotation = createVector(0,0,0);
+    this.ref3d = ref.object3D;
     bots[bots.length] = this;
   }
 
@@ -150,12 +152,12 @@ class Bot {
   }
 
   calcRotation() {
-    var z = 0;
-    var y = personRot.y;
-    var x = degrees(-PI + atan(displacementY/displacementZ));
-    var zz = this.rotation.z + (z-this.rotation.z)*0.4;
-    var yy = this.rotation.y + (y-this.rotation.y)*0.4;
-    var xx = this.rotation.x + (x-this.rotation.x)*0.4;
+    var x = degrees(this.ref3d.rotation.x);
+    var y = degrees(this.ref3d.rotation.y);
+    var z = degrees(this.ref3d.rotation.z);
+    // var z = 0;
+    // var y = personRot.y;
+    // var x = degrees(-PI + atan((displacementY)/(displacementZ)));
     return createVector(x, y, z);
   }
 
@@ -227,12 +229,6 @@ class Bot {
     steer.mult(0.05);
     return steer;
   }
-/*
-  repVector() {
-    var steer = p5.Vector.sub(this.coord, personPos);
-    steer.mult(0.05);
-    return steer;
-  }*/
 
   moveTo(target) {
     var difCoord = p5.Vector.sub(target, this.coord);
