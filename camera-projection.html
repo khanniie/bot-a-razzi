@@ -61,7 +61,7 @@
             <a-asset-item id="babyhead" src="models/baby_head.dae" crossOrigin="anonymous"></a-asset-item>
             <a-asset-item id="babybody" src="models/baby_body.dae" crossOrigin="anonymous"></a-asset-item>
             <a-asset-item id="baby" src="models/baby.dae" crossOrigin="anonymous"></a-asset-item>
-            <a-asset-item id="mom" src="models/momm.dae" crossOrigin="anonymous"></a-asset-item>
+            <a-asset-item id="mom" src="bathroom-models/mom-with-origin.dae" crossOrigin="anonymous"></a-asset-item>
             <a-asset-item id="weeb" src="bedroom-models/good-weeb.dae" crossOrigin="anonymous"></a-asset-item>
           
             <a-asset-item id="bot-dae" src="models/cameraball.dae" crossOrigin="anonymous"></a-asset-item>
@@ -170,7 +170,6 @@
         database.ref('scene').on('value', function(snapshot) {
             changeScene(snapshot.val().x); 
         }); 
-
         document.body.onkeyup = function(e) {
             if (e.keyCode == 32) {
               changeScene(currentScene + 1); 
@@ -200,7 +199,6 @@
 //                  document.querySelector("#person").setAttribute("position", "#weeb");
 //              if (currentScene == 2)
 //                  document.querySelector("#person").setAttribute("position", "#mom");
-
         }
         
         
@@ -216,7 +214,6 @@
         // database.ref('flash').on('value', function(snapshot) {
         // flash(); 
         // }); 
-
         //grab number of robots
         var numbots = 6
         database.ref('info/numbots').once('value', function(snapshot) {
@@ -241,7 +238,7 @@
         AFRAME.registerComponent('bot', {
             schema: {
                 src: {
-                    default: '#bot-daej'
+                    default: '#bot-dae'
                 },
             },
             init: function() {
@@ -316,13 +313,13 @@
                 //setup
                 // timer = setInterval(changeCameraView, 20000);
                 // if (cam != null) {
-                    changeCameraView();
+                    setTimeout(changeCameraView, 700);
                 //}
             } else {
                 clearInterval(timer);
                 currentCamera= null;
                 console.log("the VR side hasn't started up yet!");
-                var cam = document.getElementById("person");
+                var cam = document.getElementById("active-camera");
                 cam.setAttribute("position", {
                     x: 0,
                     y: 0.5,
@@ -345,7 +342,7 @@
             currentCamera.obj.setAttribute("visible", false);
             currentCamera.obj.flushToDOM();
             var pos = randombot.getAttribute('position');
-            var cam = document.getElementById("person");
+            var cam = document.getElementById("active-camera");
             // $("#changecam").css("display", "block");
             // setTimeout(function() {
             //     $("#changecam").css("display", "none");
