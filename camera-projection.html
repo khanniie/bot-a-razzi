@@ -216,7 +216,7 @@
         // database.ref('flash').on('value', function(snapshot) {
         // flash(); 
         // }); 
-        
+
         //grab number of robots
         var numbots = 6
         database.ref('info/numbots').once('value', function(snapshot) {
@@ -314,15 +314,15 @@
                     //updatebot(i);
                 }
                 //setup
-                timer = setInterval(changeCameraView, 20000);
-                if (cam != null) {
+                // timer = setInterval(changeCameraView, 20000);
+                // if (cam != null) {
                     changeCameraView();
-                }
+                //}
             } else {
                 clearInterval(timer);
                 currentCamera= null;
                 console.log("the VR side hasn't started up yet!");
-                var cam = document.getElementById("active-camera");
+                var cam = document.getElementById("person");
                 cam.setAttribute("position", {
                     x: 0,
                     y: 0.5,
@@ -345,11 +345,11 @@
             currentCamera.obj.setAttribute("visible", false);
             currentCamera.obj.flushToDOM();
             var pos = randombot.getAttribute('position');
-            var cam = document.getElementById("active-camera");
-            $("#changecam").css("display", "block");
-            setTimeout(function() {
-                $("#changecam").css("display", "none");
-            }, 600);
+            var cam = document.getElementById("person");
+            // $("#changecam").css("display", "block");
+            // setTimeout(function() {
+            //     $("#changecam").css("display", "none");
+            // }, 600);
             cam.setAttribute("position", {
                 x: pos.x,
                 y: pos.y,
