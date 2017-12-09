@@ -61,7 +61,7 @@
             <a-asset-item id="babyhead" src="models/baby_head.dae" crossOrigin="anonymous"></a-asset-item>
             <a-asset-item id="babybody" src="models/baby_body.dae" crossOrigin="anonymous"></a-asset-item>
             <a-asset-item id="baby" src="models/baby.dae" crossOrigin="anonymous"></a-asset-item>
-            <a-asset-item id="mom" src="models/momm.dae" crossOrigin="anonymous"></a-asset-item>
+            <a-asset-item id="mom" src="bathroom-models/mom-with-origin.dae" crossOrigin="anonymous"></a-asset-item>
             <a-asset-item id="weeb" src="bedroom-models/good-weeb.dae" crossOrigin="anonymous"></a-asset-item>
           
             <a-asset-item id="bot-dae" src="models/cameraball.dae" crossOrigin="anonymous"></a-asset-item>
@@ -127,6 +127,7 @@
             <a-plane color="#EEA" scale="4 5 4" position="0 4 0" rotation="90 0 0"></a-plane>
             <a-plane color="#EEA" scale="4 4 4" position="0 2 -2.5" rotation="0 0 0"></a-plane>
             <a-plane color="#EEA" scale="4 4 4" position="0 2 2.5" rotation="0 180 0"></a-plane>
+            <a-plane src="images/yoga.mp4" scale="1.460 .650 1" position="-.334 1.470 -1.344" rotation="0 0 0"></a-plane>
             <a-collada-model src="#sink" scale=".35 .35 .35" position="1 0 .1" rotation="0 180 0"></a-collada-model>
             <a-collada-model src="#toilet" scale=".3 .3 .3" position="-.4 .2 .2"></a-collada-model>
             <a-collada-model src="#door" scale=".4 .4 .4" position="-1.9 -.15 -1"></a-collada-model>
@@ -170,7 +171,6 @@
         database.ref('scene').on('value', function(snapshot) {
             changeScene(snapshot.val().x); 
         }); 
-
         document.body.onkeyup = function(e) {
             if (e.keyCode == 32) {
               changeScene(currentScene + 1); 
@@ -200,7 +200,6 @@
 //                  document.querySelector("#person").setAttribute("position", "#weeb");
 //              if (currentScene == 2)
 //                  document.querySelector("#person").setAttribute("position", "#mom");
-
         }
         
         
@@ -216,7 +215,6 @@
         // database.ref('flash').on('value', function(snapshot) {
         // flash(); 
         // }); 
-        
         //grab number of robots
         var numbots = 6
         database.ref('info/numbots').once('value', function(snapshot) {
@@ -241,7 +239,7 @@
         AFRAME.registerComponent('bot', {
             schema: {
                 src: {
-                    default: '#bot-daej'
+                    default: '#bot-dae'
                 },
             },
             init: function() {
@@ -314,10 +312,10 @@
                     //updatebot(i);
                 }
                 //setup
-                timer = setInterval(changeCameraView, 20000);
-                if (cam != null) {
-                    changeCameraView();
-                }
+                // timer = setInterval(changeCameraView, 20000);
+                // if (cam != null) {
+                    setTimeout(changeCameraView, 700);
+                //}
             } else {
                 clearInterval(timer);
                 currentCamera= null;
@@ -346,10 +344,10 @@
             currentCamera.obj.flushToDOM();
             var pos = randombot.getAttribute('position');
             var cam = document.getElementById("active-camera");
-            $("#changecam").css("display", "block");
-            setTimeout(function() {
-                $("#changecam").css("display", "none");
-            }, 600);
+            // $("#changecam").css("display", "block");
+            // setTimeout(function() {
+            //     $("#changecam").css("display", "none");
+            // }, 600);
             cam.setAttribute("position", {
                 x: pos.x,
                 y: pos.y,
