@@ -78,12 +78,9 @@ function setup() {
   personPrev = createVector(0,0,0);
   personPos = createVector(0,0,0);
 
-  var playDelay = function (sound) {
-    setInterval(sound.play(), random(500, 5000));
-  }
   for(var i=0; i<sounds.length; i++) {
     var thissound = sounds[i];
-    thissound.onended(function(thissound){setInterval(thissound.play(), random(500, 3000))});
+    thissound.onended(function(thissound){thissound.play()});
   }
   for(var i=0; i<sounds.length; i++) {
     sounds[i].play();
