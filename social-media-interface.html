@@ -5,12 +5,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="images/favicon.gif">
+    <link rel="icon" href="assets/favicon.gif">
+      <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
     <!--     <link rel="icon" href="bootstrap-3.3.7/favicon.ico"> -->
-    <title>bot-a-razzi</title>
+    <title>Bot-A-Razzi: Projection</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
@@ -194,6 +196,7 @@
             <div id="commentbar"><span class="message">Send a message</span></div><div id="other-comments"></div><div id="comment2bar"><img id="settings" src="https://nest.com/support/images/misc-assets-icons/settings-icon.png"><button id="send">SEND</button></div>
         </div></div>
     </div>
+    <script></script>
     <script src="chatbot/chatbot.js"></script>
     <script>
     var boxes = $('.box').width() * 0.75;
@@ -223,6 +226,7 @@
                 document.getElementById("postnum").innerHTML = "10";
                 document.getElementById("followernum").innerHTML = "43";
                 document.getElementById("followingnum").innerHTML = "13";
+                messages = babymessages;
           }
           if (snapshot.val().x == 1)
           {
@@ -232,6 +236,7 @@
                 document.getElementById("postnum").innerHTML = "666";
                 document.getElementById("followernum").innerHTML = "47k";
                 document.getElementById("followingnum").innerHTML = "233";
+                messages = weebmessages;
          }
           if (snapshot.val().x == 2)
           {
@@ -241,6 +246,7 @@
                 document.getElementById("postnum").innerHTML = "401";
                 document.getElementById("followernum").innerHTML = "422";
                 document.getElementById("followingnum").innerHTML = "401";
+                messages = mommessages;
           }
     });
     document.body.onkeyup = function(e) {
@@ -258,6 +264,8 @@
                 document.getElementById("postnum").innerHTML = "10";
                 document.getElementById("followernum").innerHTML = "43";
                 document.getElementById("followingnum").innerHTML = "13";
+                document.getElementById("other-comments").innerHTML = "";
+                messages = babymessages;
           }
           if (currentScene == 1)
           {
@@ -267,6 +275,8 @@
                 document.getElementById("postnum").innerHTML = "666";
                 document.getElementById("followernum").innerHTML = "47k";
                 document.getElementById("followingnum").innerHTML = "233";
+                document.getElementById("other-comments").innerHTML = "";
+                messages = weebmessages;
          }
           if (currentScene == 2)
           {
@@ -276,6 +286,8 @@
                 document.getElementById("postnum").innerHTML = "401";
                 document.getElementById("followernum").innerHTML = "422";
                 document.getElementById("followingnum").innerHTML = "401";
+                document.getElementById("other-comments").innerHTML = "";
+                messages = mommessages;
           }
           
         }
