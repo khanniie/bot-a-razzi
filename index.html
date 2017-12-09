@@ -23,6 +23,10 @@
       <audio id="sound" src="sound/sound1.mp3"></audio>
   <a-scene>
         <a-assets>
+          <audio id="cry1" src="sound/baby-crying-01.mp3"></audio>
+          <audio id="cry2" src="sound/baby-crying-03.mp3"></audio>
+          <audio id="cry3" src="sound/baby-crying-04.mp3"></audio>
+          <audio id="cry4" src="sound/baby-crying-05.mp3"></audio>
           <a-asset-item id="sky" src="bedroom-models/gradient-sky.jpg"></a-asset-item>
           <a-asset-item id="door" src="bedroom-models/door.dae"></a-asset-item>
           <a-asset-item id="chair" src="bedroom-models/chair-textured.dae"></a-asset-item>
@@ -60,6 +64,10 @@
 
 
         <a-entity id="scene0" visible="true" scale=".5 .5 .5" position="0 2 0">
+            <a-sound id="babycry1" src="#cry1" autoplay="true" loop="true"></a-sound>
+            <a-sound id="babycry2" src="#cry2" autoplay="true" loop="true"></a-sound>
+            <a-sound id="babycry3" src="#cry3" autoplay="true" loop="true"></a-sound>
+            <a-sound id="babycry4" src="#cry4" autoplay="true" loop="true"></a-sound>
             <a-light type="ambient" color="#44F" intensity=".5"></a-light>
             <a-light type="ambient" color="white" intensity=".3"></a-light>
             <a-light type="point" color="white" position="0 5 0" intensity=".8"></a-light>
@@ -142,12 +150,21 @@
             document.querySelector('#scene' + currentScene).setAttribute("visible", false);
             currentScene = x % 3;
             document.querySelector('#scene' + currentScene).setAttribute("visible", true);
-            if (currentScene == 0)
+
+            if (currentScene == 0){
                 document.querySelector("#person").setAttribute("position", "0 1.7 0");
-            else if (currentScene == 1)
+                document.querySelector("#babycry1").setAttribute("volume", 1);
+                document.querySelector("#babycry2").setAttribute("volume", 1);
+                document.querySelector("#babycry3").setAttribute("volume", 0);
+                document.querySelector("#babycry4").setAttribute("volume", 0);
+              }
+            else {
                 document.querySelector("#person").setAttribute("position", "0 1.7 0");
-            if (currentScene == 2)
-                document.querySelector("#person").setAttribute("position", "0 1.7 0");
+                document.querySelector("#babycry1").setAttribute("volume", 0);
+                document.querySelector("#babycry2").setAttribute("volume", 0);
+                document.querySelector("#babycry3").setAttribute("volume", 0);
+                document.querySelector("#babycry4").setAttribute("volume", 0);
+              }
             
     }
     
