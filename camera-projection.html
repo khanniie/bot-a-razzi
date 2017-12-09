@@ -193,16 +193,17 @@
               document.querySelector('#person'+ currentScene).setAttribute("id", "person");
               database.ref('scene').set({
                  x: currentScene,
-              if(currentScene == 2) {
-              document.querySelector("#yoga").setAttribute("src", "images/yoga.mp4"); 
-            }
-            else {
-              document.querySelector("#yoga").setAttribute("src", ""); 
-
-            }
 
                 
               });
+                      if(currentScene == 2) {
+              document.querySelector("#yoga").setAttribute("src", "images/yoga.mp4"); 
+            }
+            else {
+              document.querySelector("#yoga").removeAttribute("src");  
+
+            }
+
 //              if (currentScene == 0)
 //                  document.querySelector("#person").setAttribute("src", "#baby");
 //              else if (currentScene == 1)

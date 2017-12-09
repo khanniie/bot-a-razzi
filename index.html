@@ -151,25 +151,25 @@
             currentScene = x % 3;
             document.querySelector('#scene' + currentScene).setAttribute("visible", true);
 
-            if (currentScene == 0){
-                document.querySelector("#person").setAttribute("position", "0 1.7 0");
-                document.querySelector("#babycry1").setAttribute("volume", 1);
-                document.querySelector("#babycry2").setAttribute("volume", 1);
-                document.querySelector("#babycry3").setAttribute("volume", 0);
-                document.querySelector("#babycry4").setAttribute("volume", 0);
-              }
-            else {
-                document.querySelector("#person").setAttribute("position", "0 1.7 0");
-                document.querySelector("#babycry1").setAttribute("volume", 0);
-                document.querySelector("#babycry2").setAttribute("volume", 0);
-                document.querySelector("#babycry3").setAttribute("volume", 0);
-                document.querySelector("#babycry4").setAttribute("volume", 0);
-              }
+          if (currentScene == 0){
+              document.querySelector("#person").setAttribute("position", "0 1.7 0");
+              document.querySelector("#babycry1").setAttribute("volume", 1);
+              document.querySelector("#babycry2").setAttribute("volume", 1);
+              document.querySelector("#babycry3").setAttribute("volume", 0);
+              document.querySelector("#babycry4").setAttribute("volume", 0);
+            }
+          else {
+              document.querySelector("#person").setAttribute("position", "0 1.7 0");
+              document.querySelector("#babycry1").setAttribute("volume", 0);
+              document.querySelector("#babycry2").setAttribute("volume", 0);
+              document.querySelector("#babycry3").setAttribute("volume", 0);
+              document.querySelector("#babycry4").setAttribute("volume", 0);
+            }
             if(currentScene == 2) {
               document.querySelector("#yoga").setAttribute("src", "images/yoga.mp4"); 
             }
             else {
-              document.querySelector("#yoga").setAttribute("src", ""); 
+              document.querySelector("#yoga").removeAttribute("src");  
             }
     }
     
