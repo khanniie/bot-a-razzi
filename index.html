@@ -6,6 +6,7 @@
 <head>
     <meta charset="utf-8">
     <title>Bot-A-Razzi: VR</title>
+    <link rel="icon" href="assets/favicon.gif">
     <meta name="description" content="Hello, World! - A-Frame">
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
@@ -157,8 +158,8 @@
 
           if (currentScene == 0){
               document.querySelector("#person").setAttribute("position", "0 1.7 0");
-              document.querySelector("#babycry1").setAttribute("volume", 1);
-              document.querySelector("#babycry2").setAttribute("volume", 1);
+              document.querySelector("#babycry1").setAttribute("volume", 0.5);
+              document.querySelector("#babycry2").setAttribute("volume", 0.5);
               document.querySelector("#babycry3").setAttribute("volume", 0);
               document.querySelector("#babycry4").setAttribute("volume", 0);
             }
